@@ -61,8 +61,14 @@ title %}Log in!{% endblock %} {% block body %}
                 </div>
               </div>
             </form>
+            <div class="row">
+              <p>Mot de passe oublier ? <a href="{{ path('app_forgot_password_request') }}">cliquer ici</a></p>
+            </div>
           </div>
         </div>
+      </div>
+      <div class="row">
+        <p>Vous n'êtes pas encore inscrit, cliquer ici : <a href="{{ path('registration') }}">Inscription</a></p>
       </div>
     </div>
   </div>
