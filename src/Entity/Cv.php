@@ -59,6 +59,11 @@ class Cv
      */
     private $certificates;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="cvs")
+     */
+    private $idUser;
+
     public function __construct()
     {
         $this->infosPersos = new ArrayCollection();
@@ -293,6 +298,18 @@ class Cv
                 $certificate->setIdCv(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getIdUser(): ?User
+    {
+        return $this->idUser;
+    }
+
+    public function setIdUser(?User $idUser): self
+    {
+        $this->idUser = $idUser;
 
         return $this;
     }
