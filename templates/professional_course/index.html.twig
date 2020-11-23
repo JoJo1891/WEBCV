@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ProfessionalCourse index{% endblock %}
+
+{% block body %}
+    <h1>ProfessionalCourse index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>City</th>
+                <th>Period</th>
+                <th>Skillsacquired</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for professional_course in professional_courses %}
+            <tr>
+                <td>{{ professional_course.id }}</td>
+                <td>{{ professional_course.title }}</td>
+                <td>{{ professional_course.city }}</td>
+                <td>{{ professional_course.period }}</td>
+                <td>{{ professional_course.skillsacquired }}</td>
+                <td>
+                    <a href="{{ path('professional_course_show', {'id': professional_course.id}) }}">show</a>
+                    <a href="{{ path('professional_course_edit', {'id': professional_course.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('professional_course_new') }}">Create new</a>
+{% endblock %}
