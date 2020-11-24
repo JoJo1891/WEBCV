@@ -13,7 +13,6 @@ class CenterInterestType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('idCv')
         ;
     }
 

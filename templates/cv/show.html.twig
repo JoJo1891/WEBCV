@@ -103,7 +103,36 @@
                 <p>no records found</p>
                 <a href="{{ path('training_new', {'idcv': cv.id}) }}">Add new</a>
         {% endfor %}
+
+        <h2>Centre d'intérêt</h2>
+        {% for center_interest in center_interests %}
+            
+                <p>{{ center_interest.id }}</p>
+                <p>{{ center_interest.name }}</p>
+                <p>
+                    <a href="{{ path('center_interest_edit', {'id': center_interest.id,'idcv': cv.id}) }}">edit</a>
+                    <a href="{{ path('center_interest_new', {'idcv': cv.id}) }}">Add new</a>
+                </p>
+        {% else %}
+                <p>no records found</p>
+                <a href="{{ path('center_interest_new', {'idcv': cv.id}) }}">Add new</a>
+        {% endfor %}
     
+    <h2>Certification</h2>
+
+    {% for certificate in certificates %}
+            
+                <p>{{ certificate.id }}</p>
+                <p>{{ certificate.name }}</p>
+                <p>
+                    <a href="{{ path('certificate_edit', {'id': certificate.id,'idcv': cv.id}) }}">edit</a>
+                    <a href="{{ path('certificate_new', {'idcv': cv.id}) }}">Add new</a>
+                </p>
+        {% else %}
+            
+                <p>no records found</p>
+                <a href="{{ path('certificate_new', {'idcv': cv.id}) }}">Add new</a>
+        {% endfor %}
 
     
 {% endblock %}

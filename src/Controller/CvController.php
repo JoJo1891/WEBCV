@@ -11,6 +11,8 @@ use App\Repository\ContactInformationRepository;
 use App\Repository\SkillsRepository;
 use App\Repository\ProfessionalCourseRepository;
 use App\Repository\TrainingRepository;
+use App\Repository\CenterInterestRepository;
+use App\Repository\CertificateRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -67,7 +69,7 @@ class CvController extends AbstractController
     /**
      * @Route("/{id}", name="cv_show", methods={"GET"})
      */
-    public function show(Cv $cv, InfosPersoRepository $infosPersoRepository, ContactInformationRepository $contactInformationRepository, SkillsRepository $skillsRepository, ProfessionalCourseRepository $ProfessionalCourseRepository, TrainingRepository $trainingRepository): Response
+    public function show(Cv $cv, InfosPersoRepository $infosPersoRepository, ContactInformationRepository $contactInformationRepository, SkillsRepository $skillsRepository, ProfessionalCourseRepository $ProfessionalCourseRepository, TrainingRepository $trainingRepository, CenterInterestRepository $centerInterestRepository, CertificateRepository $certficateRepository): Response
     {
         $cvs = $cv->getId();
         return $this->render('cv/show.html.twig', [
@@ -77,6 +79,8 @@ class CvController extends AbstractController
             'skills' => $skillsRepository->findAllByIdskills($cvs),
             'professional_courses' =>$ProfessionalCourseRepository->findAllByIdProfessionalCourses($cvs),
             'trainings' =>$trainingRepository->findAllByIdTrainings($cvs),
+            'center_interests' => $centerInterestRepository->findAllByIdCenterInterests($cvs),
+            'certificates' => $certficateRepository->findAllByIdCertificates($cvs),
         ]);
     }
 

@@ -47,4 +47,15 @@ class CertificateRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findAllByIdCertificates($value)
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.idCv = :val')
+            ->setParameter('val', $value)
+            ->orderBy('c.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

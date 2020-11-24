@@ -47,4 +47,15 @@ class CenterInterestRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findAllByIdCenterInterests($value)
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.idCv = :val')
+            ->setParameter('val', $value)
+            ->orderBy('c.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

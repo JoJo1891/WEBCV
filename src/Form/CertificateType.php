@@ -13,7 +13,6 @@ class CertificateType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('idCv')
         ;
     }
 
