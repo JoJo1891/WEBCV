@@ -13,7 +13,6 @@ class SkillsType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('idCv')
         ;
     }
 
