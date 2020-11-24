@@ -15,7 +15,6 @@ class ContactInformationType extends AbstractType
             ->add('adresse')
             ->add('numero')
             ->add('email')
-            ->add('idCv')
         ;
     }
 

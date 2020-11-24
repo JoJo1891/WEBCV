@@ -12,11 +12,15 @@ class InfosPersoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('firstname')
-            ->add('name')
-            ->add('jobtitle')
-            ->add('idCv')
-        ;
+            ->add('firstname', null, [
+                    'required'   => true,
+                ])
+            ->add('name', null, [
+                    'required'   => true,
+                ])
+            ->add('jobtitle', null, [
+                    'required'   => true,
+                ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

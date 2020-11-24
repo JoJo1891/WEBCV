@@ -3,12 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\InfosPerso;
+use App\Entity\Cv;
 use App\Form\InfosPersoType;
 use App\Repository\InfosPersoRepository;
+use App\Repository\CvRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 /**
  * @Route("/infos/perso")
@@ -26,20 +29,23 @@ class InfosPersoController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="infos_perso_new", methods={"GET","POST"})
+     * @Route("/new/{idcv}", name="infos_perso_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, $idcv, CvRepository $CvRepository): Response
     {
+        $idcvs = $CvRepository->findBy(['id' =>$idcv]);
+
         $infosPerso = new InfosPerso();
         $form = $this->createForm(InfosPersoType::class, $infosPerso);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            $infosPerso->setIdCv($idcvs[0]);
             $entityManager->persist($infosPerso);
             $entityManager->flush();
 
-            return $this->redirectToRoute('infos_perso_index');
+            return $this->redirectToRoute('cv_show', ['id' => $idcvs[0]->getId()]);
         }
 
         return $this->render('infos_perso/new.html.twig', [
@@ -59,17 +65,19 @@ class InfosPersoController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="infos_perso_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit/{idcv}", name="infos_perso_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, InfosPerso $infosPerso): Response
+    public function edit(Request $request, InfosPerso $infosPerso, CvRepository $CvRepository, $idcv): Response
     {
+        $idcvs = $CvRepository->findBy(['id' =>$idcv]);
+
         $form = $this->createForm(InfosPersoType::class, $infosPerso);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('infos_perso_index');
+            return $this->redirectToRoute('cv_show', ['id' => $idcvs[0]->getId()]);
         }
 
         return $this->render('infos_perso/edit.html.twig', [

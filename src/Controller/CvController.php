@@ -5,10 +5,14 @@ namespace App\Controller;
 use App\Entity\Cv;
 use App\Form\CvType;
 use App\Repository\CvRepository;
+use App\Repository\InfosPersoRepository;
+use App\Repository\ContactInformationRepository;
+use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 /**
  * @Route("/cv")
@@ -20,8 +24,10 @@ class CvController extends AbstractController
      */
     public function index(CvRepository $cvRepository): Response
     {
+        $user = $this->getUser();
+        $users = $user->getId();
         return $this->render('cv/index.html.twig', [
-            'cvs' => $cvRepository->findAll(),
+            'cvs' => $cvRepository->findAllByIdUser($users),
         ]);
     }
 
@@ -30,31 +36,41 @@ class CvController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        
+        
+        $user = $this->getUser();
+
         $cv = new Cv();
         $form = $this->createForm(CvType::class, $cv);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            $cv->setIdUser($user);
             $entityManager->persist($cv);
             $entityManager->flush();
 
             return $this->redirectToRoute('cv_index');
+
         }
 
         return $this->render('cv/new.html.twig', [
             'cv' => $cv,
             'form' => $form->createView(),
-        ]);
+            'user' => $users,
+            ]);
     }
 
     /**
      * @Route("/{id}", name="cv_show", methods={"GET"})
      */
-    public function show(Cv $cv): Response
+    public function show(Cv $cv, InfosPersoRepository $infosPersoRepository, ContactInformationRepository $contactInformationRepository): Response
     {
+        $cvs = $cv->getId();
         return $this->render('cv/show.html.twig', [
             'cv' => $cv,
+            'ips' => $infosPersoRepository->findAllByIdCv($cvs),
+            'cis' => $contactInformationRepository->findAllByIdci($cvs),
         ]);
     }
 

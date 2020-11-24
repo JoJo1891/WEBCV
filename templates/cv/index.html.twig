@@ -1,35 +1,40 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Cv index{% endblock %}
+{% block title %}Mes CV{% endblock %}
 
 {% block body %}
-    <h1>Cv index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for cv in cvs %}
-            <tr>
-                <td>{{ cv.id }}</td>
-                <td>{{ cv.name }}</td>
-                <td>
-                    <a href="{{ path('cv_show', {'id': cv.id}) }}">show</a>
-                    <a href="{{ path('cv_edit', {'id': cv.id}) }}">edit</a>
-                </td>
-            </tr>
+<div class="container">
+    <div class="row text-center">
+            <h1>Mes CV</h1>
+            <p>retrouver tous mes CV </p>
+    </div> 
+</div>
+<div class="container text-center">
+    <div class="row">
+       {% for cv in cvs %}
+        <div class="col-4">
+            <div class="card col-sm" style="width: 18rem;height: 15rem;padding-bottom:4rem;margin-bottom:4rem;">
+                <div class="card-body">
+                    <p class="card-text">{{ cv.name }}</p>
+                </div>
+                <a href="{{ path('cv_show', {'id': cv.id}) }}"><i class="fas fa-7x fa-file-alt"></i></a>
+                
+            </div>
+        </div>
+        
+                
         {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
+                
         {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('cv_new') }}">Create new</a>
+        <div class="col-4">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h2 class="card-text">Nouveau CV</h2>
+                    <a href="{{ path('cv_new') }}"><i class="fas fa-7x fa-file-alt"></i> </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
 {% endblock %}

@@ -47,4 +47,15 @@ class InfosPersoRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findAllByIdCv($value)
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.idCv = :val')
+            ->setParameter('val', $value)
+            ->orderBy('c.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

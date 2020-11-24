@@ -42,9 +42,34 @@ class CvRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('c')
             ->andWhere('c.exampleField = :val')
             ->setParameter('val', $value)
+            ->orderBy('c.id', 'ASC')
+            ->setMaxResults(1)
             ->getQuery()
-            ->getOneOrNullResult()
+            ->getResult()
         ;
     }
     */
+
+    public function findAllByIdUser($value)
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.idUser = :val')
+            ->setParameter('val', $value)
+            ->orderBy('c.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function findLastByIdUser($value)
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.idUser = :val')
+            ->setParameter('val', $value)
+            ->orderBy('c.id', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

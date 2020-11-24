@@ -17,10 +17,42 @@
             </tr>
         </tbody>
     </table>
-
     <a href="{{ path('cv_index') }}">back to list</a>
 
     <a href="{{ path('cv_edit', {'id': cv.id}) }}">edit</a>
+
+    <h2>Infos Personnelles</h2>
+{% for infos_perso in ips %}
+    <p>{{ infos_perso.id}}</p>
+    <p>{{ infos_perso.firstname}}</p>
+    <p>{{ infos_perso.name}}</p>
+    <p>{{ infos_perso.jobtitle}}</p>
+    <a href="{{ path('infos_perso_edit', {'id': infos_perso.id,'idcv': cv.id}) }}">edit</a>
+    {% else %}
+            
+                <p>no records found</p>
+
+                <a href="{{ path('infos_perso_new', {'idcv': cv.id}) }}">Create new</a>
+            
+    {% endfor %}
+
+    <h2>Coordonées</h2>
+
+    {% for contact_information in cis %}
+    <p>{{ contact_information.id}}</p>
+    <p>{{ contact_information.adresse}}</p>
+    <p>{{ contact_information.numero}}</p>
+    <p>{{ contact_information.email}}</p>
+    <a href="{{ path('contact_information_edit', {'id': contact_information.id,'idcv': cv.id}) }}">edit</a>
+    {% else %}
+            
+                <p>no records found</p>
+
+                <a href="{{ path('contact_information_new', {'idcv': cv.id}) }}">Create new</a>
+            
+    {% endfor %}
+
+    
 
     {{ include('cv/_delete_form.html.twig') }}
 {% endblock %}

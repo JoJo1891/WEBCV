@@ -8,7 +8,10 @@
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     />
-    {% block stylesheets %}{% endblock %}
+    <link rel="stylesheet" type="text/css" href="public/build/app.css">
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
   </head>
   <body>
     <nav
@@ -21,7 +24,7 @@
         {% if app.user %}
         <li><a class="nav-link" href="{{ path('app_about') }}">A Propos</a></li>
         <li><a class="nav-link" href="{{ path('app_contact') }}">Contact</a></li>
-        <li><a class="nav-link" href="#!">Profil</a></li>
+        <li><a class="nav-link" href="{{ path('cv_index')}}">Mes CV</a></li>
         <li><a class="nav-link" href="{{ path('app_logout') }}">Logout</a></li>
         {% else %}
         <li><a class="nav-link" href="{{ path('app_about') }}">A Propos</a></li>
@@ -30,6 +33,10 @@
         {% endif %}
       </ul>
     </nav>
-    {% block body %}{% endblock %} {% block javascripts %}{% endblock %}
+    {% block body %}{% endblock %} 
+    
+    {% block javascripts %}
+		{{ encore_entry_script_tags('app') }}    
+	{% endblock %}
   </body>
 </html>

@@ -47,4 +47,16 @@ class ContactInformationRepository extends ServiceEntityRepository
         ;
     }
     */
+
+
+    public function findAllByIdCi($value)
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.idCv = :val')
+            ->setParameter('val', $value)
+            ->orderBy('c.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

@@ -6,15 +6,16 @@ use App\Entity\Cv;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 class CvType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('idUser')
-        ;
+            ->add('name', null, [
+                    'required'   => true,
+                ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
