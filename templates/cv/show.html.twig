@@ -118,7 +118,7 @@
                 <a href="{{ path('center_interest_new', {'idcv': cv.id}) }}">Add new</a>
         {% endfor %}
     
-    <h2>Certification</h2>
+    <h2>Certifications</h2>
 
     {% for certificate in certificates %}
             
@@ -132,6 +132,23 @@
             
                 <p>no records found</p>
                 <a href="{{ path('certificate_new', {'idcv': cv.id}) }}">Add new</a>
+        {% endfor %}
+
+        <h2>Langues</h2>
+        {% for langue in langues %}
+           
+                <p>{{ langue.id }}</p>
+                <p>{{ langue.name }}</p>
+                <p>
+                    <a href="{{ path('langue_edit', {'id': langue.id,'idcv': cv.id}) }}">edit</a>
+                    <a href="{{ path('langue_new', {'idcv': cv.id}) }}">Add new</a>
+                </p>
+       
+        {% else %}
+        
+                <p>no records found</p>
+                <a href="{{ path('langue_new', {'idcv': cv.id}) }}">Add new</a>
+           
         {% endfor %}
 
     

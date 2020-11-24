@@ -13,7 +13,6 @@ class LangueType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('idCv')
         ;
     }
 
