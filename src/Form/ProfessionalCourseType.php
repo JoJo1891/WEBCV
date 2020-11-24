@@ -16,7 +16,7 @@ class ProfessionalCourseType extends AbstractType
             ->add('city')
             ->add('period')
             ->add('skillsacquired')
-            ->add('idCv')
+            ->add('description')
         ;
     }
 

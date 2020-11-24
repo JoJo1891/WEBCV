@@ -71,6 +71,23 @@
             </tr>
         {% endfor %}
 
+        <h2>Parcours Professionnel</h2>
+        {% for professional_course in professional_courses %}
+                <p>{{ professional_course.id }}</p>
+                <p>{{ professional_course.title }}</p>
+                <p>{{ professional_course.city }}</p>
+                <p>{{ professional_course.period }}</p>
+                <p>{{ professional_course.skillsacquired }}</p>
+                <p>{{ professional_course.description }}</p>
+                <p>
+                    <a href="{{ path('professional_course_edit', {'id': professional_course.id,'idcv': cv.id}) }}">edit</a>
+                    <a href="{{ path('professional_course_new', {'idcv': cv.id}) }}">Add new</a>
+                </p>
+        {% else %}
+                <p>no records found</p>
+                <a href="{{ path('professional_course_new', {'idcv': cv.id}) }}">Add new</a>
+        {% endfor %}
+
     
 
     
