@@ -16,15 +16,6 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class SkillsController extends AbstractController
 {
-    /**
-     * @Route("/", name="skills_index", methods={"GET"})
-     */
-    public function index(SkillsRepository $skillsRepository): Response
-    {
-        return $this->render('skills/index.html.twig', [
-            'skills' => $skillsRepository->findAll(),
-        ]);
-    }
 
     /**
      * @Route("/new/{idcv}", name="skills_new", methods={"GET","POST"})
@@ -53,22 +44,12 @@ class SkillsController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="skills_show", methods={"GET"})
-     */
-    public function show(Skills $skill): Response
-    {
-        return $this->render('skills/show.html.twig', [
-            'skill' => $skill,
-        ]);
-    }
-
-    /**
      * @Route("/{id}/edit/{idcv}", name="skills_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Skills $skill, CvRepository $CvRepository, $idcv): Response
     {
         $idcvs = $CvRepository->findBy(['id' =>$idcv]);
-        
+
         $form = $this->createForm(SkillsType::class, $skill);
         $form->handleRequest($request);
 
@@ -81,20 +62,23 @@ class SkillsController extends AbstractController
         return $this->render('skills/edit.html.twig', [
             'skill' => $skill,
             'form' => $form->createView(),
+            'cv' => $idcvs[0]->getId(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="skills_delete", methods={"DELETE"})
+     * @Route("/{id}/{idcv}", name="skills_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Skills $skill): Response
+    public function delete(Request $request, Skills $skill, CvRepository $CvRepository, $idcv): Response
     {
+         $idcvs = $CvRepository->findBy(['id' =>$idcv]);
+
         if ($this->isCsrfTokenValid('delete'.$skill->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($skill);
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('skills_index');
+        return $this->redirectToRoute('cv_show', ['id' => $idcvs[0]->getId()]);
     }
 }

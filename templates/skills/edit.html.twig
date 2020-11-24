@@ -7,7 +7,7 @@
 
     {{ include('skills/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('skills_index') }}">back to list</a>
+     <a href="{{ path('cv_show', {'id':cv}) }}">back to list</a>
 
     {{ include('skills/_delete_form.html.twig') }}
 {% endblock %}

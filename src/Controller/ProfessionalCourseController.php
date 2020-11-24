@@ -16,15 +16,6 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ProfessionalCourseController extends AbstractController
 {
-    /**
-     * @Route("/", name="professional_course_index", methods={"GET"})
-     */
-    public function index(ProfessionalCourseRepository $professionalCourseRepository): Response
-    {
-        return $this->render('professional_course/index.html.twig', [
-            'professional_courses' => $professionalCourseRepository->findAll(),
-        ]);
-    }
 
     /**
      * @Route("/new/{idcv}", name="professional_course_new", methods={"GET","POST"})
@@ -53,16 +44,6 @@ class ProfessionalCourseController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="professional_course_show", methods={"GET"})
-     */
-    public function show(ProfessionalCourse $professionalCourse): Response
-    {
-        return $this->render('professional_course/show.html.twig', [
-            'professional_course' => $professionalCourse,
-        ]);
-    }
-
-    /**
      * @Route("/{id}/edit/{idcv}", name="professional_course_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, ProfessionalCourse $professionalCourse, CvRepository $CvRepository, $idcv): Response
@@ -81,20 +62,23 @@ class ProfessionalCourseController extends AbstractController
         return $this->render('professional_course/edit.html.twig', [
             'professional_course' => $professionalCourse,
             'form' => $form->createView(),
+            'cv' => $idcvs[0]->getId(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="professional_course_delete", methods={"DELETE"})
+     * @Route("/{id}/{idcv}", name="professional_course_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, ProfessionalCourse $professionalCourse): Response
+    public function delete(Request $request, ProfessionalCourse $professionalCourse, CvRepository $CvRepository, $idcv): Response
     {
+         $idcvs = $CvRepository->findBy(['id' =>$idcv]);
+
         if ($this->isCsrfTokenValid('delete'.$professionalCourse->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($professionalCourse);
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('professional_course_index');
+        return $this->redirectToRoute('cv_show', ['id' => $idcvs[0]->getId()]);
     }
 }

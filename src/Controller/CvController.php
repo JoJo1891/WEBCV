@@ -89,8 +89,10 @@ class CvController extends AbstractController
     /**
      * @Route("/{id}/edit", name="cv_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Cv $cv): Response
+    public function edit(Request $request, Cv $cv, CvRepository $CvRepository): Response
     {
+        $idcvs = $CvRepository->findBy(['id' =>$cv->getId()]); 
+
         $form = $this->createForm(CvType::class, $cv);
         $form->handleRequest($request);
 
@@ -103,6 +105,7 @@ class CvController extends AbstractController
         return $this->render('cv/edit.html.twig', [
             'cv' => $cv,
             'form' => $form->createView(),
+            'cv' => $idcvs[0]->getId(),
         ]);
     }
 

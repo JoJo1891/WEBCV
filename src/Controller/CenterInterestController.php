@@ -17,16 +17,6 @@ use Symfony\Component\Routing\Annotation\Route;
 class CenterInterestController extends AbstractController
 {
     /**
-     * @Route("/", name="center_interest_index", methods={"GET"})
-     */
-    public function index(CenterInterestRepository $centerInterestRepository): Response
-    {
-        return $this->render('center_interest/index.html.twig', [
-            'center_interests' => $centerInterestRepository->findAll(),
-        ]);
-    }
-
-    /**
      * @Route("/new/{idcv}", name="center_interest_new", methods={"GET","POST"})
      */
     public function new(Request $request, $idcv, CvRepository $CvRepository): Response
@@ -53,22 +43,12 @@ class CenterInterestController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="center_interest_show", methods={"GET"})
-     */
-    public function show(CenterInterest $centerInterest): Response
-    {
-        return $this->render('center_interest/show.html.twig', [
-            'center_interest' => $centerInterest,
-        ]);
-    }
-
-    /**
      * @Route("/{id}/edit/{idcv}", name="center_interest_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, CenterInterest $centerInterest, CvRepository $CvRepository, $idcv): Response
     {
         $idcvs = $CvRepository->findBy(['id' =>$idcv]);
-        
+
         $form = $this->createForm(CenterInterestType::class, $centerInterest);
         $form->handleRequest($request);
 
@@ -81,20 +61,23 @@ class CenterInterestController extends AbstractController
         return $this->render('center_interest/edit.html.twig', [
             'center_interest' => $centerInterest,
             'form' => $form->createView(),
+            'cv' => $idcvs[0]->getId(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="center_interest_delete", methods={"DELETE"})
+     * @Route("/{id}/{idcv}", name="center_interest_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, CenterInterest $centerInterest): Response
+    public function delete(Request $request, CenterInterest $centerInterest, CvRepository $CvRepository, $idcv): Response
     {
+        $idcvs = $CvRepository->findBy(['id' =>$idcv]);
+
         if ($this->isCsrfTokenValid('delete'.$centerInterest->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($centerInterest);
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('center_interest_index');
+        return $this->redirectToRoute('cv_show', ['id' => $idcvs[0]->getId()]);
     }
 }

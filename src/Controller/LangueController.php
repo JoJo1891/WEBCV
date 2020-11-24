@@ -68,7 +68,7 @@ class LangueController extends AbstractController
     public function edit(Request $request, Langue $langue, CvRepository $CvRepository, $idcv): Response
     {
         $idcvs = $CvRepository->findBy(['id' =>$idcv]);
-        
+
         $form = $this->createForm(LangueType::class, $langue);
         $form->handleRequest($request);
 
@@ -81,20 +81,23 @@ class LangueController extends AbstractController
         return $this->render('langue/edit.html.twig', [
             'langue' => $langue,
             'form' => $form->createView(),
+            'cv' => $idcvs[0]->getId(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="langue_delete", methods={"DELETE"})
+     * @Route("/{id}/{idcv}", name="langue_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Langue $langue): Response
+    public function delete(Request $request, Langue $langue, CvRepository $CvRepository, $idcv): Response
     {
+         $idcvs = $CvRepository->findBy(['id' =>$idcv]);
+
         if ($this->isCsrfTokenValid('delete'.$langue->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($langue);
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('langue_index');
+        return $this->redirectToRoute('cv_show', ['id' => $idcvs[0]->getId()]);
     }
 }

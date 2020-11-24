@@ -7,7 +7,7 @@
 
     {{ include('center_interest/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('center_interest_index') }}">back to list</a>
+     <a href="{{ path('cv_show', {'id':cv}) }}">back to list</a>
 
     {{ include('center_interest/_delete_form.html.twig') }}
 {% endblock %}

@@ -17,16 +17,6 @@ use Symfony\Component\Routing\Annotation\Route;
 class TrainingController extends AbstractController
 {
     /**
-     * @Route("/", name="training_index", methods={"GET"})
-     */
-    public function index(TrainingRepository $trainingRepository): Response
-    {
-        return $this->render('training/index.html.twig', [
-            'trainings' => $trainingRepository->findAll(),
-        ]);
-    }
-
-    /**
      * @Route("/new/{idcv}", name="training_new", methods={"GET","POST"})
      */
     public function new(Request $request, $idcv, CvRepository $CvRepository): Response
@@ -53,22 +43,12 @@ class TrainingController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="training_show", methods={"GET"})
-     */
-    public function show(Training $training): Response
-    {
-        return $this->render('training/show.html.twig', [
-            'training' => $training,
-        ]);
-    }
-
-    /**
      * @Route("/{id}/edit/{idcv}", name="training_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Training $training, CvRepository $CvRepository, $idcv): Response
     {
         $idcvs = $CvRepository->findBy(['id' =>$idcv]);
-        
+
         $form = $this->createForm(TrainingType::class, $training);
         $form->handleRequest($request);
 
@@ -81,20 +61,23 @@ class TrainingController extends AbstractController
         return $this->render('training/edit.html.twig', [
             'training' => $training,
             'form' => $form->createView(),
+            'cv' => $idcvs[0]->getId(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="training_delete", methods={"DELETE"})
+     * @Route("/{id}/{idcv}", name="training_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Training $training): Response
+    public function delete(Request $request, Training $training, CvRepository $CvRepository, $idcv): Response
     {
+         $idcvs = $CvRepository->findBy(['id' =>$idcv]);
+
         if ($this->isCsrfTokenValid('delete'.$training->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($training);
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('training_index');
+        return $this->redirectToRoute('cv_show', ['id' => $idcvs[0]->getId()]);
     }
 }
