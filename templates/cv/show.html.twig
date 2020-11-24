@@ -88,6 +88,21 @@
                 <a href="{{ path('professional_course_new', {'idcv': cv.id}) }}">Add new</a>
         {% endfor %}
 
+        <h2>Formations</h2>
+        {% for training in trainings %}
+                <p>{{ training.id }}</p>
+                <p>{{ training.diplomatitle }}</p>
+                <p>{{ training.school }}</p>
+                <p>{{ training.city }}</p>
+                <p>{{ training.yearofgraduation }}</p>
+                <p>
+                    <a href="{{ path('training_edit', {'id': training.id,'idcv': cv.id}) }}">edit</a>
+                    <a href="{{ path('training_new', {'idcv': cv.id}) }}">Add new</a>
+                </p>
+        {% else %}
+                <p>no records found</p>
+                <a href="{{ path('training_new', {'idcv': cv.id}) }}">Add new</a>
+        {% endfor %}
     
 
     

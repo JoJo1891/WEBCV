@@ -64,6 +64,11 @@ class Cv
      */
     private $idUser;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Langue::class, mappedBy="idCv")
+     */
+    private $langues;
+
     public function __construct()
     {
         $this->infosPersos = new ArrayCollection();
@@ -73,6 +78,7 @@ class Cv
         $this->trainings = new ArrayCollection();
         $this->centerInterests = new ArrayCollection();
         $this->certificates = new ArrayCollection();
+        $this->langues = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -323,5 +329,35 @@ class Cv
         return $this->name;
         // to show the id of the Category in the select
         // return $this->id;
+    }
+
+    /**
+     * @return Collection|Langue[]
+     */
+    public function getLangues(): Collection
+    {
+        return $this->langues;
+    }
+
+    public function addLangue(Langue $langue): self
+    {
+        if (!$this->langues->contains($langue)) {
+            $this->langues[] = $langue;
+            $langue->setIdCv($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLangue(Langue $langue): self
+    {
+        if ($this->langues->removeElement($langue)) {
+            // set the owning side to null (unless already changed)
+            if ($langue->getIdCv() === $this) {
+                $langue->setIdCv(null);
+            }
+        }
+
+        return $this;
     }
 }

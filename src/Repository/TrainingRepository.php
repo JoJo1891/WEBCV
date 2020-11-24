@@ -47,4 +47,15 @@ class TrainingRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findAllByIdTrainings($value)
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.idCv = :val')
+            ->setParameter('val', $value)
+            ->orderBy('c.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

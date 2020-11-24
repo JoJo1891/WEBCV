@@ -10,6 +10,7 @@ use App\Repository\InfosPersoRepository;
 use App\Repository\ContactInformationRepository;
 use App\Repository\SkillsRepository;
 use App\Repository\ProfessionalCourseRepository;
+use App\Repository\TrainingRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -66,7 +67,7 @@ class CvController extends AbstractController
     /**
      * @Route("/{id}", name="cv_show", methods={"GET"})
      */
-    public function show(Cv $cv, InfosPersoRepository $infosPersoRepository, ContactInformationRepository $contactInformationRepository, SkillsRepository $skillsRepository, ProfessionalCourseRepository $ProfessionalCourseRepository): Response
+    public function show(Cv $cv, InfosPersoRepository $infosPersoRepository, ContactInformationRepository $contactInformationRepository, SkillsRepository $skillsRepository, ProfessionalCourseRepository $ProfessionalCourseRepository, TrainingRepository $trainingRepository): Response
     {
         $cvs = $cv->getId();
         return $this->render('cv/show.html.twig', [
@@ -75,6 +76,7 @@ class CvController extends AbstractController
             'cis'  => $contactInformationRepository->findAllByIdci($cvs),
             'skills' => $skillsRepository->findAllByIdskills($cvs),
             'professional_courses' =>$ProfessionalCourseRepository->findAllByIdProfessionalCourses($cvs),
+            'trainings' =>$trainingRepository->findAllByIdTrainings($cvs),
         ]);
     }
 
