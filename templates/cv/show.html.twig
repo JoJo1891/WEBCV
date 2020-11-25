@@ -27,22 +27,25 @@
                 margin: auto;
                 overflow: hidden;
             }
+            .magin-top{
+                margin-top: 20px;
+            }
         </style>
     {% endblock %}
 
 {% block body %}
     <div class="container">
         <div class="row">
-            <div class="left-align col s6 m8 l8">
-                <h1>{{ cv.name }}</h1>
-            </div>
-            <div class="right-align col s6 m4 l4">
-                <div class="row">
-                    <a class="right-align waves-effect waves-light btn-floating btn-large" style="magin-top: 20px" href="{{ path('cv_index') }}"><i class="material-icons right">arrow_back</i>Retour</a>
+            <div class="right-align col s12">
+                <div class="row magin-top">
+                    <a class="left blue waves-effect waves-light  btn-large" style="magin-top: 20px" href="{{ path('cv_index') }}"><i class="material-icons right">arrow_back</i> Retour à mes CV</a>
 
-                    <a class="right-align waves-effect waves-light btn-floating btn-large" href="{{ path('cv_edit', {'id': cv.id}) }}"><i class="material-icons right">edit</i></a>
                 </div>
             </div>
+            <div class="left-align col s12">
+                <h1>{{ cv.name }}<a href="{{ path('cv_edit', {'id': cv.id}) }}"><i class=" small green-text material-icons">edit</i></a></h1>
+            </div>
+            
         </div>
     </div>
 
@@ -70,7 +73,8 @@
                                     <a class="green waves-effect waves-light btn-floating" href="{{ path('infos_perso_edit', {'id': infos_perso.id,'idcv': cv.id}) }}"><i class="material-icons right">edit</i></a>
                                 </p>
                             {% else %}
-                                <p>no records found</p>
+                                <p>Aucune information personnelle?
+                                    Ajouter en cliquant</p>
 
                                 <a class="green waves-effect waves-light btn-floating" href="{{ path('infos_perso_new', {'idcv': cv.id}) }}"><i class="material-icons right">add</i></a>
                                 
@@ -90,14 +94,15 @@
 
                                 <a class="green waves-effect waves-light btn-floating" href="{{ path('contact_information_edit', {'id': contact_information.id,'idcv': cv.id}) }}"><i class="material-icons right">edit</i></a>
                             {% else %}
-                                <p>no records found</p>
+                                <p>Aucune coordonnées?
+                                    Ajouter en cliquant</p>
 
                                 <a class="green waves-effect waves-light btn-floating" href="{{ path('contact_information_new', {'idcv': cv.id}) }}"><i class="material-icons right">add</i></a>
                                         
                             {% endfor %}
                         </div>
                         <div class="row">
-                            <p class="flow-text">Compétense<hr class="grey style1"></p>
+                            <p class="flow-text">Compétences<hr class="grey style1"></p>
 
                             {% for skill in skills %}
                                 <div class="chip">
@@ -108,7 +113,8 @@
                                     
                             {% else %}
                                
-                                    <p>no records found</p>
+                                    <p>Aucune Compétences?
+                                    Ajouter en cliquant</p>
                                     
                             {% endfor %}
 
@@ -123,7 +129,8 @@
                                 </div>
                             {% else %}
                             
-                                <p>no records found</p>
+                                <p>Aucune langues?
+                                    Ajouter en cliquant</p>
                         
                             {% endfor %}
 
@@ -139,7 +146,8 @@
                                 
                             {% else %}
                                 
-                                    <p>no records found</p>
+                                    <p>Aucune certification?
+                                    Ajouter en cliquant</p>
                                    
                             {% endfor %}
 
@@ -154,7 +162,8 @@
                                 </div>
                                     
                             {% else %}
-                                    <p>no records found</p>
+                                    <p>Aucune information personnelle?
+                                    Ajouter en cliquant</p>
                                     
                             {% endfor %}
                             <a class="green waves-effect waves-light btn-floating" href="{{ path('center_interest_new', {'idcv': cv.id}) }}"><i class="material-icons right">add</i></a>
@@ -172,7 +181,8 @@
                                         <a href="{{ path('training_edit', {'id': training.id,'idcv': cv.id}) }}"><i class="green-text material-icons">edit</i></a>
                                     </p>
                             {% else %}
-                                    <p>no records found</p>
+                                    <p>Aucune Formation?
+                                    Ajouter en cliquant</p>
                             {% endfor %}
                             <a class="green waves-effect waves-light btn-floating" href="{{ path('training_new', {'idcv': cv.id}) }}"><i class="material-icons right">add</i></a>
                         </div>
@@ -185,7 +195,8 @@
                                 <p class="description">{{ professional_course.description }}<a href="{{ path('professional_course_edit', {'id': professional_course.id,'idcv': cv.id}) }}"><i class="green-text material-icons">edit</i></a></p>
                                 
                             {% else %}
-                                    <p>no records found</p>
+                                    <p><p>Aucune expérience professionnelle?
+                                    Ajouter en cliquant</p></p>
                             {% endfor %}
                             <a class="green waves-effect waves-light btn-floating" href="{{ path('professional_course_new', {'idcv': cv.id}) }}"><i class="material-icons right">add</i></a>
                         </div>
