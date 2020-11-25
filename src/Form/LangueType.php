@@ -14,7 +14,8 @@ class LangueType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-        'attr' => ['class' => 'materialize-text input-field col s6 offset-s3']
+                'label' => 'Langue',
+                'attr' => ['class' => 'center-align']
     ])
         ;
     }

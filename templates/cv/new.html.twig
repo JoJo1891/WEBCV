@@ -3,9 +3,17 @@
 {% block title %}New Cv{% endblock %}
 
 {% block body %}
-    <h1>Create new Cv</h1>
+	<div class="container">
+    	<div class="row">
+      		<div class="card br20 blue-grey lighten-5 center-align">
+			    <h1>Créer un Cv</h1>
 
-    {{ include('cv/_form.html.twig') }}
+			    {{ include('cv/_form.html.twig') }}
+			    <div class="row left">
+			     	<a class="btn blue waves-effect waves-light" href="{{ path('cv_show', {'id':cv}) }}">Retour au Cv</a>
+			 	</div>
+			</div>
+		</div>
+	</div>
 
-    <a href="{{ path('cv_index') }}">back to list</a>
 {% endblock %}

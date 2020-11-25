@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 
 class ContactInformationType extends AbstractType
 {
@@ -15,13 +16,16 @@ class ContactInformationType extends AbstractType
     {
         $builder
             ->add('adresse', TextType::class, [
-        'attr' => ['class' => 'materialize-text input-field col s6 offset-s3']
+                'label' => 'Votre adresse : XXXXXXXX, CodePostale, Ville',
+                'attr' => ['class' => 'center-align']
     ])
             ->add('numero', NumberType::class, [
-                'attr' => ['class' => 'materialize-text input-field col s6 offset-s3']
+                'label' => 'Numéro de téléphone',
+                'attr' => ['class' => 'center-align']
             ])
-            ->add('email', TextType::class, [
-        'attr' => ['class' => 'materialize-text input-field col s6 offset-s3']
+            ->add('email', EmailType::class, [
+                'label' => 'Votre email',
+                'attr' => ['class' => 'center-align']
     ])
         ;
     }

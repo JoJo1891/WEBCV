@@ -1,8 +1,30 @@
+
 {{ form_start(form) }}
     {#{ form_widget(form) }#}
-    {{ form_row(form.avatar) }}
-    {{ form_row(form.firstname) }}
-    {{ form_row(form.name) }}
-    {{ form_row(form.jobtitle) }}
-    <button  class="btn btn-large waves-effect waves-light">{{ button_label|default('Save') }}</button>
+    <div class="col s12 center-align">
+    	<div class="row">
+	        <div class="input-field col s8 offset-s2">
+		    	{{ form_row(form.avatar) }}
+		    </div>
+		</div>
+		 <div class="row">
+	        <div class="input-field col s8 offset-s2">
+		    	{{ form_row(form.firstname) }}
+		    </div>
+		</div>
+		 <div class="row">
+	        <div class="input-field col s8 offset-s2">
+		    	{{ form_row(form.name) }}
+		    </div>
+		</div>
+		 <div class="row">
+	        <div class="input-field col s8 offset-s2">
+		    	{{ form_row(form.jobtitle) }}
+		    </div>
+		</div>
+	    <div class="row">	
+	    	<button  class="green btn btn-large waves-effect waves-light">{{ button_label|default('Sauvegarder') }}</button>
+	    </div>
+    </div>
+    
 {{ form_end(form) }}

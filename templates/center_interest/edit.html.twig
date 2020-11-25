@@ -6,13 +6,17 @@
 	<div class="container">
     	<div class="row">
       		<div class="card br20 blue-grey lighten-5 center-align">
-			    <h1>Edit CenterInterest</h1>
+			    <h1>Modifier le centre d'intérêt</h1>
+			    <div class="row">
+			    	{{ include('center_interest/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+			    </div>
 
-			    {{ include('center_interest/_form.html.twig', {'button_label': 'Update'}) }}
-
-			     <a class="btn btn-large waves-effect waves-light" href="{{ path('cv_show', {'id':cv}) }}">Retour au Cv</a>
-
-			    {{ include('center_interest/_delete_form.html.twig') }}
+			    <div class="row left">
+			     	<a class="btn blue waves-effect waves-light" href="{{ path('cv_show', {'id':cv}) }}">Retour au Cv</a>
+			 	</div>
+			 	<div class="row">
+			    	{{ include('center_interest/_delete_form.html.twig') }}
+			    </div>
 			</div>
 		</div>
 	</div>

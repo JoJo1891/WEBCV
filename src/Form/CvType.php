@@ -15,7 +15,8 @@ class CvType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-        'attr' => ['class' => 'materialize-text input-field col s6 offset-s3']
+                'label' => 'Nom du CV',
+                'attr' => ['class' => 'center-align']
     ]);
     }
 

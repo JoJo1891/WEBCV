@@ -3,9 +3,16 @@
 {% block title %}New ContactInformation{% endblock %}
 
 {% block body %}
-    <h1>Create new ContactInformation</h1>
+	<div class="container">
+    	<div class="row">
+      		<div class="card br20 blue-grey lighten-5 center-align">
+			    <h1>Ajouter des informations de contact</h1>
 
-    {{ include('contact_information/_form.html.twig') }}
-
-    <a href="{{ path('contact_information_index') }}">back to list</a>
+			    {{ include('contact_information/_form.html.twig') }}
+			    <div class="row left">
+			     	<a class="btn blue waves-effect waves-light" href="{{ path('cv_show', {'id':cv}) }}">Retour au Cv</a>
+			 	</div>
+			</div>
+		</div>
+	</div>
 {% endblock %}

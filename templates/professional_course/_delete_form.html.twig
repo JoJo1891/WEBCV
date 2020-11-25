@@ -1,5 +1,7 @@
 <form method="post" action="{{ path('professional_course_delete', {'id': professional_course.id, 'idcv':cv}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
     <input type="hidden" name="_method" value="DELETE">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ professional_course.id) }}">
-    <button class="btn">Delete</button>
+    <div class="row right">
+    	<button class="red waves-effect waves-light btn">Delete</button>
+    </div>
 </form>

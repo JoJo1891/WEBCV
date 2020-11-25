@@ -14,19 +14,24 @@ class ProfessionalCourseType extends AbstractType
     {
         $builder
             ->add('title', TextType::class, [
-        'attr' => ['class' => 'materialize-text input-field col s6 offset-s3']
+                'label' => 'Nom de l entreprise',
+                'attr' => ['class' => 'center-align']
     ])
             ->add('city', TextType::class, [
-        'attr' => ['class' => 'materialize-text input-field col s6 offset-s3']
+                'label' => 'Ville',
+                'attr' => ['class' => 'center-align']
     ])
             ->add('period', TextType::class, [
-        'attr' => ['class' => 'materialize-text input-field col s6 offset-s3']
+                'label' => 'Période',
+                'attr' => ['class' => 'center-align']
     ])
             ->add('skillsacquired', TextType::class, [
-        'attr' => ['class' => 'materialize-text input-field col s6 offset-s3']
+                'label' => 'Compétence aquis',
+                'attr' => ['class' => 'center-align']
     ])
             ->add('description', TextType::class, [
-        'attr' => ['class' => 'materialize-text input-field col s6 offset-s3']
+                'label' => 'Description des missions',
+                'attr' => ['class' => 'center-align']
     ])
         ;
     }

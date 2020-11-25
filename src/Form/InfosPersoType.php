@@ -16,13 +16,16 @@ class InfosPersoType extends AbstractType
     {
         $builder
             ->add('firstname', TextType::class, [
-        'attr' => ['class' => 'materialize-text input-field col s6 offset-s3']
+                'label' => 'Prénom',
+                'attr' => ['class' => 'center-align']
     ])
             ->add('name', TextType::class, [
-        'attr' => ['class' => 'materialize-text input-field col s6 offset-s3']
+                'label' => 'Nom',
+                'attr' => ['class' => 'center-align']
     ])
             ->add('jobtitle', TextType::class, [
-        'attr' => ['class' => 'materialize-text input-field col s6 offset-s3']
+                'label' => 'Intitulé de Poste',
+                'attr' => ['class' => 'center-align']
     ])
             ->add('avatar', FileType::class, [
                 'label' => 'Avatar (PNG ou JPEG)',

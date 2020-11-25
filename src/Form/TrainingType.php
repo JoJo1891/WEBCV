@@ -14,16 +14,20 @@ class TrainingType extends AbstractType
     {
         $builder
             ->add('diplomatitle', TextType::class, [
-        'attr' => ['class' => 'materialize-text input-field col s6 offset-s3']
+                'label' => 'Nom du diplome',
+                'attr' => ['class' => 'center-align']
     ])
             ->add('school', TextType::class, [
-        'attr' => ['class' => 'materialize-text input-field col s6 offset-s3']
+                'label' => 'Ecole',
+                'attr' => ['class' => 'center-align']
     ])
             ->add('city', TextType::class, [
-        'attr' => ['class' => 'materialize-text input-field col s6 offset-s3']
+                'label' => 'Ville',
+                'attr' => ['class' => 'center-align']
     ])
             ->add('yearofgraduation', TextType::class, [
-        'attr' => ['class' => 'materialize-text input-field col s6 offset-s3']
+                'label' => 'Année d obtention',
+                'attr' => ['class' => 'center-align']
     ])
         ;
     }

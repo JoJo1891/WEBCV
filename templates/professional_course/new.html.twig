@@ -3,9 +3,16 @@
 {% block title %}New ProfessionalCourse{% endblock %}
 
 {% block body %}
-    <h1>Create new ProfessionalCourse</h1>
+	<div class="container">
+    	<div class="row">
+      		<div class="card br20 blue-grey lighten-5 center-align">
+			    <h1>Ajouter un nouveau parcours professionnel</h1>
 
-    {{ include('professional_course/_form.html.twig') }}
-
-    <a href="{{ path('professional_course_index') }}">back to list</a>
+			    {{ include('professional_course/_form.html.twig') }}
+			    <div class="row left">
+			     	<a class="btn blue waves-effect waves-light" href="{{ path('cv_show', {'id':cv}) }}">Retour au Cv</a>
+			 	</div>
+			</div>
+		</div>
+	</div>
 {% endblock %}

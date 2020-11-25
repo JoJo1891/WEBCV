@@ -1,11 +1,14 @@
 {{ form_start(form) }}
     {#{ form_widget(form) }#}
-
-    {{ form_row(form.name) }}
     <div class="row">
-    	<div class="input-field col s12">	
-    	<button class="btn btn-large waves-effect waves-light">{{ button_label|default('Save') }}</button>
-    </div>
-    </div>
+	        <div class="input-field col s8 offset-s2">
+    			{{ form_row(form.name) }}
+    		</div>
+    	</div>
+	    <div class="row">
+	    	<div class="input-field col s12">	
+	    		<button class="green btn btn-large waves-effect waves-light">{{ button_label|default('Sauvegarder') }}</button>
+	    	</div>
+	    </div>
     
 {{ form_end(form) }}

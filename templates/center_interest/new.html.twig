@@ -6,12 +6,14 @@
 	<div class="container">
     	<div class="row">
       		<div class="card br20 blue-grey lighten-5 center-align">
-			    <h1>Create new CenterInterest</h1>
+			    <h1>Ajouter un center d'intérêt</h1>
 
 			    {{ include('center_interest/_form.html.twig') }}
+			    <div class="row left">
+			     	<a class="btn blue waves-effect waves-light" href="{{ path('cv_show', {'id':cv}) }}">Retour au Cv</a>
+			 	</div>
 			</div>
 		</div>
 	</div>
 
-    <a class="btn btn-large waves-effect waves-light" href="{{ path('cv_show', {'id':cv}) }}">Retour au Cv</a>
 {% endblock %}

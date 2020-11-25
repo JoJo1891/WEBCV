@@ -14,7 +14,8 @@ class SkillsType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-        'attr' => ['class' => 'materialize-text input-field col s6 offset-s3']
+                'label' => 'Nom de la compétence',
+                'attr' => ['class' => 'center-align']
     ])
         ;
     }
