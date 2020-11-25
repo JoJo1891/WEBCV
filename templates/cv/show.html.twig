@@ -1,155 +1,183 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Cv{% endblock %}
+    {% block stylesheets %}
+        <style type="text/css">
+            hr.style1 { 
+              border: 0; 
+              height: 1px; 
+              background-image: -webkit-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+              background-image: -moz-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+              background-image: -ms-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+              background-image: -o-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0); 
+            }
+            .br20{
+                border-radius: 20px!important;
+            }
+            .sous-titre{
+                font-size: 20px;
+            }
+            .description{
+                font-size: 15px;
+            }
+        </style>
+    {% endblock %}
 
 {% block body %}
-    <h1>Cv</h1>
+    <div class="container">
+        <div class="row">
+            <div class="left-align col s6 m8 l8">
+                <h1>{{ cv.name }}</h1>
+            </div>
+            <div class="right-align col s6 m4 l4">
+                <div class="row">
+                    <a class="right-align waves-effect waves-light btn-floating btn-large" style="magin-top: 20px" href="{{ path('cv_index') }}"><i class="material-icons right">arrow_back</i>Retour</a>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ cv.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ cv.name }}</td>
-            </tr>
-        </tbody>
-    </table>
-    <a href="{{ path('cv_index') }}">back to list</a>
+                    <a class="right-align waves-effect waves-light btn-floating btn-large" href="{{ path('cv_edit', {'id': cv.id}) }}"><i class="material-icons right">edit</i></a>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <a href="{{ path('cv_edit', {'id': cv.id}) }}">edit</a>
-    {{ include('cv/_delete_form.html.twig') }}
+    <div class="container">
+        <div class="row">
+            <div class="card br20 blue-grey lighten-5">
+                <div class="row br20">
+                    <div class="card-content grey lighten-4 col s12 m3 l3 br20">
+                        <div class="row center-align">
+                            {% for infos_perso in ips %}
+                                <h2>{{ infos_perso.firstname}} {{ infos_perso.name}}</h2>
+                        
+                                <p class="flow-text">{{ infos_perso.jobtitle}}
+                                    <a class="green waves-effect waves-light btn-floating" href="{{ path('infos_perso_edit', {'id': infos_perso.id,'idcv': cv.id}) }}"><i class="material-icons right">edit</i></a>
+                                </p>
+                            {% else %}
+                                <p>no records found</p>
 
-    <h2>Infos Personnelles</h2>
-{% for infos_perso in ips %}
-    <p>{{ infos_perso.id}}</p>
-    <p>{{ infos_perso.firstname}}</p>
-    <p>{{ infos_perso.name}}</p>
-    <p>{{ infos_perso.jobtitle}}</p>
-    <a href="{{ path('infos_perso_edit', {'id': infos_perso.id,'idcv': cv.id}) }}">edit</a>
-    {% else %}
-            
-                <p>no records found</p>
+                                <a class="green waves-effect waves-light btn-floating" href="{{ path('infos_perso_new', {'idcv': cv.id}) }}"><i class="material-icons right">add</i></a>
+                                
+                            {% endfor %}
+                        </div>
+                        <div class="row">
+                            <p class="flow-text">Coordonnées<hr class="grey style1"></p>
+                            
 
-                <a href="{{ path('infos_perso_new', {'idcv': cv.id}) }}">Create new</a>
-            
-    {% endfor %}
+                            {% for contact_information in cis %}
 
-    <h2>Coordonées</h2>
+                                <p><i class="tiny material-icons">location_on</i>{{ contact_information.adresse}}</p>
+                                
+                                <p><i class="tiny material-icons">phone</i>{{ contact_information.numero}}</p>
 
-    {% for contact_information in cis %}
-    <p>{{ contact_information.id}}</p>
-    <p>{{ contact_information.adresse}}</p>
-    <p>{{ contact_information.numero}}</p>
-    <p>{{ contact_information.email}}</p>
-    <a href="{{ path('contact_information_edit', {'id': contact_information.id,'idcv': cv.id}) }}">edit</a>
-    {% else %}
-            
-                <p>no records found</p>
+                                <p><i class="tiny material-icons">mail</i>{{ contact_information.email}}</p>
 
-                <a href="{{ path('contact_information_new', {'idcv': cv.id}) }}">Create new</a>
-            
-    {% endfor %}
+                                <a class="green waves-effect waves-light btn-floating" href="{{ path('contact_information_edit', {'id': contact_information.id,'idcv': cv.id}) }}"><i class="material-icons right">edit</i></a>
+                            {% else %}
+                                <p>no records found</p>
 
-    <h2>Compétences</h2>
-    {% for skill in skills %}
-            
-                <p>{{ skill.id }}</p>
-                <p>{{ skill.name }}</p>
-                
+                                <a class="green waves-effect waves-light btn-floating" href="{{ path('contact_information_new', {'idcv': cv.id}) }}"><i class="material-icons right">add</i></a>
+                                        
+                            {% endfor %}
+                        </div>
+                        <div class="row">
+                            <p class="flow-text">Compétense<hr class="grey style1"></p>
+
+                            {% for skill in skills %}
+                                <div class="chip">
+                                    <p><i class="tiny material-icons">developer_board</i>{{ skill.name }} <a href="{{ path('skills_edit', {'id': skill.id,'idcv': cv.id}) }}"><i class="green-text material-icons right">edit</i></a></p>
+                                </div>
+                                    
+                                        
+                                    
+                            {% else %}
+                               
+                                    <p>no records found</p>
+                                    
+                            {% endfor %}
+
+                            <a class="green waves-effect waves-light btn-floating" href="{{ path('skills_new', {'idcv': cv.id}) }}"><i class="material-icons right">add</i></a>
+                        </div>
+                        <div class="row">
+                            <p class="flow-text">Langues<hr class="grey style1"></p>
+
+                            {% for langue in langues %}
+                                <div class="chip">
+                                    <p><i class="tiny material-icons">chat_bubble</i>{{ langue.name }}<a href="{{ path('langue_edit', {'id': langue.id,'idcv': cv.id}) }}"><i class="green-text material-icons">edit</i></a></p>
+                                </div>
+                            {% else %}
+                            
+                                <p>no records found</p>
+                        
+                            {% endfor %}
+
+                            <a class="green waves-effect waves-light btn-floating" href="{{ path('langue_new', {'idcv': cv.id}) }}"><i class="material-icons right">add</i></a>
+                        </div>
+                        <div class="row">
+                            <p class="flow-text">Certifications<hr class="grey style1"></p>
+
+                            {% for certificate in certificates %}
+                                <div class="chip">
+                                    <p><i class="tiny material-icons">class</i>{{ certificate.name }}<a href="{{ path('certificate_edit', {'id': certificate.id,'idcv': cv.id}) }}"><i class="green-text material-icons">edit</i></a></p>
+                                </div>
+                                
+                            {% else %}
+                                
+                                    <p>no records found</p>
+                                   
+                            {% endfor %}
+
+                             <a class="green waves-effect waves-light btn-floating" href="{{ path('certificate_new', {'idcv': cv.id}) }}"><i class="material-icons right">add</i></a>
+                        </div>
+                        <div class="row">
+                            <p class="flow-text">Centre d'intérêts<hr class="grey style1"></p>
+
+                            {% for center_interest in center_interests %}
+                                <div class="chip">
+                                    <p><i class="tiny material-icons">extension</i>{{ center_interest.name }}<a href="{{ path('center_interest_edit', {'id': center_interest.id,'idcv': cv.id}) }}"><i class="green-text material-icons">edit</i></a></p>
+                                </div>
+                                    
+                            {% else %}
+                                    <p>no records found</p>
+                                    
+                            {% endfor %}
+                            <a class="green waves-effect waves-light btn-floating" href="{{ path('center_interest_new', {'idcv': cv.id}) }}"><i class="material-icons right">add</i></a>
+                        </div>
+
+                    </div>
                     
-                    <a href="{{ path('skills_edit', {'id': skill.id,'idcv': cv.id}) }}">edit</a>
-                    <a href="{{ path('skills_new', {'idcv': cv.id}) }}">Add new</a>
-             
-            
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-                <a href="{{ path('skills_new', {'idcv': cv.id}) }}">Add new</a>
-            </tr>
-        {% endfor %}
+                    <div class="card-content blue-grey lighten-5 col s12 m9 l9 br20">
+                        <div class="row">
+                            <p class="flow-text">Formations<hr class="grey style1"></p>
 
-        <h2>Parcours Professionnel</h2>
-        {% for professional_course in professional_courses %}
-                <p>{{ professional_course.id }}</p>
-                <p>{{ professional_course.title }}</p>
-                <p>{{ professional_course.city }}</p>
-                <p>{{ professional_course.period }}</p>
-                <p>{{ professional_course.skillsacquired }}</p>
-                <p>{{ professional_course.description }}</p>
-                <p>
-                    <a href="{{ path('professional_course_edit', {'id': professional_course.id,'idcv': cv.id}) }}">edit</a>
-                    <a href="{{ path('professional_course_new', {'idcv': cv.id}) }}">Add new</a>
-                </p>
-        {% else %}
-                <p>no records found</p>
-                <a href="{{ path('professional_course_new', {'idcv': cv.id}) }}">Add new</a>
-        {% endfor %}
+                            {% for training in trainings %}
+                                <p class="flow-text"><i class="small material-icons">school</i> {{ training.diplomatitle }} - {{ training.school }}</p>
+                                <p class="sous-titre">{{ training.city }} - {{ training.yearofgraduation }}
+                                        <a href="{{ path('training_edit', {'id': training.id,'idcv': cv.id}) }}"><i class="green-text material-icons">edit</i></a>
+                                    </p>
+                            {% else %}
+                                    <p>no records found</p>
+                            {% endfor %}
+                            <a class="green waves-effect waves-light btn-floating" href="{{ path('training_new', {'idcv': cv.id}) }}"><i class="material-icons right">add</i></a>
+                        </div>
+                        <div class="row">
+                            <p class="flow-text">Expériences Professionels<hr class="grey style1"></p>
 
-        <h2>Formations</h2>
-        {% for training in trainings %}
-                <p>{{ training.id }}</p>
-                <p>{{ training.diplomatitle }}</p>
-                <p>{{ training.school }}</p>
-                <p>{{ training.city }}</p>
-                <p>{{ training.yearofgraduation }}</p>
-                <p>
-                    <a href="{{ path('training_edit', {'id': training.id,'idcv': cv.id}) }}">edit</a>
-                    <a href="{{ path('training_new', {'idcv': cv.id}) }}">Add new</a>
-                </p>
-        {% else %}
-                <p>no records found</p>
-                <a href="{{ path('training_new', {'idcv': cv.id}) }}">Add new</a>
-        {% endfor %}
+                            {% for professional_course in professional_courses %}
+                                <p class="flow-text"><i class="small material-icons">work</i> {{ professional_course.title }} - {{ professional_course.city }}</p>
+                                <p class="sous-titre">{{ professional_course.skillsacquired }} - {{ professional_course.period }}</p>
+                                <p class="description">{{ professional_course.description }}<a href="{{ path('professional_course_edit', {'id': professional_course.id,'idcv': cv.id}) }}"><i class="green-text material-icons">edit</i></a></p>
+                                
+                            {% else %}
+                                    <p>no records found</p>
+                            {% endfor %}
+                            <a class="green waves-effect waves-light btn-floating" href="{{ path('professional_course_new', {'idcv': cv.id}) }}"><i class="material-icons right">add</i></a>
+                        </div>
+                    </div>
+                </div>
+              </div>
 
-        <h2>Centre d'intérêt</h2>
-        {% for center_interest in center_interests %}
-            
-                <p>{{ center_interest.id }}</p>
-                <p>{{ center_interest.name }}</p>
-                <p>
-                    <a href="{{ path('center_interest_edit', {'id': center_interest.id,'idcv': cv.id}) }}">edit</a>
-                    <a href="{{ path('center_interest_new', {'idcv': cv.id}) }}">Add new</a>
-                </p>
-        {% else %}
-                <p>no records found</p>
-                <a href="{{ path('center_interest_new', {'idcv': cv.id}) }}">Add new</a>
-        {% endfor %}
-    
-    <h2>Certifications</h2>
+        </div>
+    </div>
 
-    {% for certificate in certificates %}
-            
-                <p>{{ certificate.id }}</p>
-                <p>{{ certificate.name }}</p>
-                <p>
-                    <a href="{{ path('certificate_edit', {'id': certificate.id,'idcv': cv.id}) }}">edit</a>
-                    <a href="{{ path('certificate_new', {'idcv': cv.id}) }}">Add new</a>
-                </p>
-        {% else %}
-            
-                <p>no records found</p>
-                <a href="{{ path('certificate_new', {'idcv': cv.id}) }}">Add new</a>
-        {% endfor %}
-
-        <h2>Langues</h2>
-        {% for langue in langues %}
-           
-                <p>{{ langue.id }}</p>
-                <p>{{ langue.name }}</p>
-                <p>
-                    <a href="{{ path('langue_edit', {'id': langue.id,'idcv': cv.id}) }}">edit</a>
-                    <a href="{{ path('langue_new', {'idcv': cv.id}) }}">Add new</a>
-                </p>
-       
-        {% else %}
-        
-                <p>no records found</p>
-                <a href="{{ path('langue_new', {'idcv': cv.id}) }}">Add new</a>
-           
-        {% endfor %}
 
     
 {% endblock %}

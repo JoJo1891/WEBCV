@@ -6,17 +6,13 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-10 ml-md-auto">
-    	    <div class="text-center">
-                <div class="card bg-light mb-3 mt-5" style="width: 800px;">
+      <div class="card br20 blue-grey lighten-5 center-align">
                     <div class="card-body">
-    					<p>An email has been sent that contains a link that you can click to reset your password. This link will expire in {{ tokenLifetime|date('g') }} hour(s).</p>
+    					<p class="flow-text">An email has been sent that contains a link that you can click to reset your password. This link will expire in {{ tokenLifetime|date('g') }} hour(s).</p>
     					
-    					<p>If you don't receive an email please check your spam folder or <a href="{{ path('app_forgot_password_request') }}">try again</a>.</p>
+    					<p class="flow-text">If you don't receive an email please check your spam folder or <a href="{{ path('app_forgot_password_request') }}">try again</a>.</p>
     				</div>
     			</div>
     		</div>
     	</div>
-    </div>
-</div>
 {% endblock %}

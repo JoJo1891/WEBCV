@@ -3,11 +3,17 @@
 {% block title %}Edit CenterInterest{% endblock %}
 
 {% block body %}
-    <h1>Edit CenterInterest</h1>
+	<div class="container">
+    	<div class="row">
+      		<div class="card br20 blue-grey lighten-5 center-align">
+			    <h1>Edit CenterInterest</h1>
 
-    {{ include('center_interest/_form.html.twig', {'button_label': 'Update'}) }}
+			    {{ include('center_interest/_form.html.twig', {'button_label': 'Update'}) }}
 
-     <a href="{{ path('cv_show', {'id':cv}) }}">back to list</a>
+			     <a class="btn btn-large waves-effect waves-light" href="{{ path('cv_show', {'id':cv}) }}">Retour au Cv</a>
 
-    {{ include('center_interest/_delete_form.html.twig') }}
+			    {{ include('center_interest/_delete_form.html.twig') }}
+			</div>
+		</div>
+	</div>
 {% endblock %}

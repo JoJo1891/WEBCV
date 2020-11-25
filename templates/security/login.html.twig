@@ -1,11 +1,9 @@
 {# templates/security/login.html.twig #} {% extends 'base.html.twig' %} {% block
 title %}Log in!{% endblock %} {% block body %}
 <div class="container">
-  <div class="row">
-    <div class="col-md-10 ml-md-auto">
-      <div class="">
-        <div class="card bg-light mb-3 mt-5" style="width: 800px;">
-          <div class="card-body">
+    <div class="row">
+      <div class="card br20 blue-grey lighten-5 center-align">
+        <h1>Vueillez-vous identifier !</h1>
             <form class="form-horizontal" role="form" method="post">
               {% if error %}
               <div class="alert alert-danger">
@@ -17,8 +15,8 @@ title %}Log in!{% endblock %} {% block body %}
                 <a href="{{ path('app_logout') }}">Logout</a>
               </div>
               {% endif %}
-              <div class="card-header mb-3">Please sign in</div>
-              <div class="form-group">
+              <div class="row">
+              <div class="input-field col s6 offset-s3">
                 <label for="email" class="col-md-4 control-label"
                   >E-Mail Address</label
                 >
@@ -34,7 +32,9 @@ title %}Log in!{% endblock %} {% block body %}
                   />
                 </div>
               </div>
-              <div class="form-group">
+            </div>
+            <div class="row">
+              <div class="input-field col s6 offset-s3">
                 <label for="password" class="col-md-4 control-label"
                   >Password</label
                 >
@@ -48,6 +48,7 @@ title %}Log in!{% endblock %} {% block body %}
                   />
                 </div>
               </div>
+            </div>
               <input
                 type="hidden"
                 name="_csrf_token"
@@ -55,8 +56,8 @@ title %}Log in!{% endblock %} {% block body %}
               />
               <div class="form-group">
                 <div class="col-md-12">
-                  <button type="submit" class="btn btn-primary">
-                    <i class="fa fa-btn fa-sign-in"></i> Login
+                  <button type="submit" class="btn btn-large waves-effect waves-light">
+                      <i class="material-icons right">assignment_turned_in</i> Connexion
                   </button>
                 </div>
               </div>
@@ -64,13 +65,13 @@ title %}Log in!{% endblock %} {% block body %}
             <div class="row">
               <p>Mot de passe oublier ? <a href="{{ path('app_forgot_password_request') }}">cliquer ici</a></p>
             </div>
+
+            <div class="row">
+              <p>Vous n'êtes pas encore inscrit, cliquer ici : <a href="{{ path('registration') }}">Inscription</a></p>
+            </div>
           </div>
         </div>
       </div>
-      <div class="row">
-        <p>Vous n'êtes pas encore inscrit, cliquer ici : <a href="{{ path('registration') }}">Inscription</a></p>
-      </div>
-    </div>
-  </div>
-</div>
+      
+    
 {% endblock %}

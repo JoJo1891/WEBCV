@@ -39,6 +39,7 @@ class CenterInterestController extends AbstractController
         return $this->render('center_interest/new.html.twig', [
             'center_interest' => $centerInterest,
             'form' => $form->createView(),
+            'cv' => $idcvs[0]->getId(),
         ]);
     }
 

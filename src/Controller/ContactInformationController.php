@@ -39,6 +39,7 @@ class ContactInformationController extends AbstractController
         return $this->render('contact_information/new.html.twig', [
             'contact_information' => $contactInformation,
             'form' => $form->createView(),
+            'cv' => $idcvs[0]->getId(),
         ]);
     }
 

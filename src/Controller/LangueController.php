@@ -16,15 +16,6 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class LangueController extends AbstractController
 {
-    /**
-     * @Route("/", name="langue_index", methods={"GET"})
-     */
-    public function index(LangueRepository $langueRepository): Response
-    {
-        return $this->render('langue/index.html.twig', [
-            'langues' => $langueRepository->findAll(),
-        ]);
-    }
 
     /**
      * @Route("/new/{idcv}", name="langue_new", methods={"GET","POST"})
@@ -49,16 +40,7 @@ class LangueController extends AbstractController
         return $this->render('langue/new.html.twig', [
             'langue' => $langue,
             'form' => $form->createView(),
-        ]);
-    }
-
-    /**
-     * @Route("/{id}", name="langue_show", methods={"GET"})
-     */
-    public function show(Langue $langue): Response
-    {
-        return $this->render('langue/show.html.twig', [
-            'langue' => $langue,
+            'cv' => $idcvs[0]->getId(),
         ]);
     }
 

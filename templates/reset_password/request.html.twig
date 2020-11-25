@@ -8,39 +8,34 @@
     {% endfor %}
     
     <div class="container">
-        <div class="row">
-            <div class="col-md-10 ml-md-auto">
-              <div class="text-center">
-                <div class="card bg-light mb-3 mt-5" style="width: 800px;">
-                    <div class="card-body">
+    <div class="row">
+      <div class="card br20 blue-grey lighten-5 center-align">
 
-                        <h1>Reset your password</h1>
+                        <h1>Réinitialiser votre mot de passe</h1>
 
                         {{ form_start(requestForm) }}
-                            <div class="form-group">
-                                <div class="col-md-12">
+                            <div class="row">
+                                <div class="input-field col s6 offset-s3">
                                     {{ form_row(requestForm.email) }}
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <div class="col-md-12">
+                            <div class="row">
+                                <div class="input-field col s6 offset-s3">
                                     <div>
                                         <small>
-                                            Enter your email address and we we will send you a
-                                            link to reset your password.
+                                            Entrer votre adresse et nous vous enverons un lien de réinitialisation de mot de passe.
                                         </small>
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    <button class="btn btn-primary">Send password reset email</button>
+                                <div class="row">
+                                <div class="input-field col s6 offset-s3">
+                                    <button class="btn btn-large waves-effect waves-light">
+                      <i class="material-icons right">assignment_turned_in</i>envoyer un email de réinitialisation</button>
                                 </div>
                             </div>
                         {{ form_end(requestForm) }}
                     </div>
                 </div>
             </div>
-        </div> 
-    </div> 
 {% endblock %}

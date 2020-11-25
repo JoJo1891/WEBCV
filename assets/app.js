@@ -7,10 +7,16 @@
 
 // any CSS you import will output into a single css file (app.css in this case)
 import './styles/app.css';
-import './styles/all.css';
-import './js/all.js';
+import './styles/materialize.css';
+import './js/materialize.js';
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to import it.
 // import $ from 'jquery';
+//const $ = require('jquery');
+//global.$ = global.jQuery = $;
+
+//require('./materialize.js');
+//Init select inputs
+//$('select').material_select();
 
 console.log('Hello Webpack Encore! Edit me in assets/app.js');

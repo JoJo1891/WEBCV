@@ -41,6 +41,7 @@ class InfosPersoController extends AbstractController
         return $this->render('infos_perso/new.html.twig', [
             'infos_perso' => $infosPerso,
             'form' => $form->createView(),
+            'cv' => $idcvs[0]->getId(),
         ]);
     }
 

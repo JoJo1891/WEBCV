@@ -39,6 +39,7 @@ class TrainingController extends AbstractController
         return $this->render('training/new.html.twig', [
             'training' => $training,
             'form' => $form->createView(),
+            'cv' => $idcvs[0]->getId(),
         ]);
     }
 

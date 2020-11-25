@@ -40,6 +40,7 @@ class ProfessionalCourseController extends AbstractController
         return $this->render('professional_course/new.html.twig', [
             'professional_course' => $professionalCourse,
             'form' => $form->createView(),
+            'cv' => $idcvs[0]->getId(),
         ]);
     }
 

@@ -3,9 +3,15 @@
 {% block title %}New Langue{% endblock %}
 
 {% block body %}
-    <h1>Create new Langue</h1>
+	<div class="container">
+    	<div class="row">
+      		<div class="card br20 blue-grey lighten-5 center-align">
+			    <h1>Create new Langue</h1>
 
-    {{ include('langue/_form.html.twig') }}
+			    {{ include('langue/_form.html.twig') }}
+			</div>
+		</div>
+	</div>
 
-    <a href="{{ path('langue_index') }}">back to list</a>
+    <a class="btn btn-large waves-effect waves-light" href="{{ path('cv_show', {'id':cv}) }}">Retour au Cv</a>
 {% endblock %}

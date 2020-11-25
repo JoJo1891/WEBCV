@@ -40,6 +40,7 @@ class SkillsController extends AbstractController
         return $this->render('skills/new.html.twig', [
             'skill' => $skill,
             'form' => $form->createView(),
+            'cv' => $idcvs[0]->getId(),
         ]);
     }
 

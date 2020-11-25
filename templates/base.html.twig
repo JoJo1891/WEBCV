@@ -4,39 +4,69 @@
   <head>
     <meta charset="UTF-8" />
     <title>{% block title %}Welcome!{% endblock %}</title>
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-    />
-    <link rel="stylesheet" type="text/css" href="public/build/app.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style type="text/css">
+    	.fixbottom{
+    		position: absolute;
+    		bottom: 0;
+ 			height: 100px;
+    	}
+    	.height100{
+ 			height: 100%!important;
+    	}
+    </style>
     {% block stylesheets %}
-        {{ encore_entry_link_tags('app') }}
     {% endblock %}
   </head>
   <body>
-    <nav
-      class="navbar navbar-expand-lg navbar-dark bg-dark"
-      style="height: 70px;"
-    >
-      <a class="navbar-brand" href="#">Web CV</a>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent"></div>
-      <ul class="nav navbar-nav navbar-right">
-        {% if app.user %}
-        <li><a class="nav-link" href="{{ path('app_about') }}">A Propos</a></li>
-        <li><a class="nav-link" href="{{ path('app_contact') }}">Contact</a></li>
-        <li><a class="nav-link" href="{{ path('cv_index')}}">Mes CV</a></li>
-        <li><a class="nav-link" href="{{ path('app_logout') }}">Logout</a></li>
-        {% else %}
-        <li><a class="nav-link" href="{{ path('app_about') }}">A Propos</a></li>
-        <li><a class="nav-link" href="{{ path('app_contact') }}">Contact</a></li>
-        <li><a class="nav-link" href="{{ path('app_login') }}">Login</a></li>
-        {% endif %}
-      </ul>
-    </nav>
+  	<nav>
+    	<div class="nav-wrapper grey darken-4">
+		    <a href="{{ path('app_home') }}" class="brand-logo">Web CV</a>
+		    <ul id="nav-mobile" class="right hide-on-med-and-down">
+		    	{% if app.user %}
+			        <li><a class="hoverable" href="{{ path('app_about') }}">A Propos</a></li>
+			        <li><a class="hoverable" href="{{ path('app_contact') }}">Contact</a></li>
+			        <li><a class="hoverable" href="{{ path('cv_index')}}">Mes CV</a></li>
+			        <li><a class="hoverable" href="{{ path('app_logout') }}">Logout</a></li>
+		        {% else %}
+			        <li><a class="hoverable" href="{{ path('app_about') }}">A Propos</a></li>
+			        <li><a class="hoverable" href="{{ path('app_contact') }}">Contact</a></li>
+			        <li><a class="hoverable" href="{{ path('app_login') }}">Login</a></li>
+        		{% endif %}
+		    </ul>
+    	</div>
+  	</nav>
+    
     {% block body %}{% endblock %} 
+
+    <nav class="fixbottom hide-on-large-only">
+    	<div class="nav-wrapper grey darken-4">
+		    <ul class="row center-align">
+		    	{% if app.user %}
+			        <li class="col s2 offset-s1 height100"><a class="flow-text" href="{{ path('app_home') }}">Accueil</a></li>
+			        <li class="col s2 height100"><a class="flow-text" href="{{ path('app_about') }}">A Propos</a></li>
+			        <li class="col s2 height100"><a class="flow-text" href="{{ path('app_contact') }}">Contact</a></li>
+			        <li class="col s2 height100"><a class="flow-text" href="{{ path('cv_index')}}">Mes CV</a></li>
+			        <li class="col s2 height100"><a class="flow-text" href="{{ path('app_logout') }}">Logout</a></li>
+		        {% else %}
+		        	<li class="col s3 height100"><a class="flow-text" href="{{ path('app_home') }}" >Accueil</a></li>
+
+			        <li class="col s3 height100"><a class="flow-text" href="{{ path('app_about') }}">A Propos</a></li>
+
+			        <li class="col s3 height100"><a class="flow-text" href="{{ path('app_contact') }}">Contact</a></li>
+
+			        <li class="col s3 height100"><a class="flow-text" href="{{ path('app_login') }}">Login</a></li>
+        		{% endif %}
+		    </ul>
+    	</div>
+  	</nav>
     
     {% block javascripts %}
-		{{ encore_entry_script_tags('app') }}    
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+            <script src="{{ asset("build/app.js") }}"></script>
+            <!-- Compiled and minified JavaScript -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>   
 	{% endblock %}
   </body>
 </html>

@@ -39,6 +39,7 @@ class CertificateController extends AbstractController
         return $this->render('certificate/new.html.twig', [
             'certificate' => $certificate,
             'form' => $form->createView(),
+            'cv' => $idcvs[0]->getId(),
         ]);
     }
 

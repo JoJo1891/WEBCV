@@ -7,15 +7,16 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class CvType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', null, [
-                    'required'   => true,
-                ]);
+            ->add('name', TextType::class, [
+        'attr' => ['class' => 'materialize-text input-field col s6 offset-s3']
+    ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
