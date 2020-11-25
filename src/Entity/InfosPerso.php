@@ -89,4 +89,21 @@ class InfosPerso
 
         return $this;
     }
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $avatarFilename;
+
+    public function getAvatarFilename()
+    {
+        return $this->avatarFilename;
+    }
+
+    public function setAvatarFilename($avatarFilename)
+    {
+        $this->avatarFilename = $avatarFilename;
+
+        return $this;
+    }
 }

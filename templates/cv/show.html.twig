@@ -20,6 +20,13 @@
             .description{
                 font-size: 15px;
             }
+            .carre{
+                width: 150px;
+                height: 150px;
+                border-radius: 50%;
+                margin: auto;
+                overflow: hidden;
+            }
         </style>
     {% endblock %}
 
@@ -46,6 +53,17 @@
                     <div class="card-content grey lighten-4 col s12 m3 l3 br20">
                         <div class="row center-align">
                             {% for infos_perso in ips %}
+                                {% if infos_perso.avatarFilename == false %}
+                                    <div class="carre">
+                                    <img src="{{ asset('uploads/avatars/blank-avatar.png') }}" alt="" class=" responsive-img">
+                                </div>
+                                {% else %}
+                                    <div class="carre">
+                                    <img src="{{ asset('uploads/avatars/'~ infos_perso.avatarFilename ~'') }}" alt="" class=" responsive-img">
+                                </div>
+                                {% endif %}
+                                
+                                
                                 <h2>{{ infos_perso.firstname}} {{ infos_perso.name}}</h2>
                         
                                 <p class="flow-text">{{ infos_perso.jobtitle}}

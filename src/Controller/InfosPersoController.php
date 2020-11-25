@@ -12,6 +12,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use App\Service\FileUploader;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * @Route("/infos/perso")
@@ -21,7 +23,7 @@ class InfosPersoController extends AbstractController
     /**
      * @Route("/new/{idcv}", name="infos_perso_new", methods={"GET","POST"})
      */
-    public function new(Request $request, $idcv, CvRepository $CvRepository): Response
+    public function new(Request $request, $idcv, CvRepository $CvRepository, FileUploader $fileUploader): Response
     {
         $idcvs = $CvRepository->findBy(['id' =>$idcv]);
 
@@ -30,6 +32,14 @@ class InfosPersoController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $avatarFile = $form->get('avatar')->getData();
+
+            if ($avatarFile) {
+            $avatarFileName = $fileUploader->upload($avatarFile);
+            $infosPerso->setavatarFilename($avatarFileName);
+            }
+        
             $entityManager = $this->getDoctrine()->getManager();
             $infosPerso->setIdCv($idcvs[0]);
             $entityManager->persist($infosPerso);
@@ -48,7 +58,7 @@ class InfosPersoController extends AbstractController
     /**
      * @Route("/{id}/edit/{idcv}", name="infos_perso_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, InfosPerso $infosPerso, CvRepository $CvRepository, $idcv): Response
+    public function edit(Request $request, InfosPerso $infosPerso, CvRepository $CvRepository, $idcv, FileUploader $fileUploader): Response
     {
         $idcvs = $CvRepository->findBy(['id' =>$idcv]);
 
@@ -56,6 +66,19 @@ class InfosPersoController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $avatarFile = $form->get('avatar')->getData();
+            $oldAvatarFile = $form->getData()->getAvatarFilename();
+
+            if ($avatarFile){
+                $avatarFileName = $fileUploader->upload($avatarFile);
+                if ($oldAvatarFile != null){
+                    $del = $fileUploader->deleteUpload($oldAvatarFile);
+                }
+                $infosPerso->setavatarFilename($avatarFileName);
+
+            }
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('cv_show', ['id' => $idcvs[0]->getId()]);
