@@ -47,7 +47,11 @@
 			        <li class="col s2 offset-s1 height100"><a class="flow-text" href="{{ path('app_home') }}">Accueil</a></li>
 			        <li class="col s2 height100"><a class="flow-text" href="{{ path('app_about') }}">A Propos</a></li>
 			        <li class="col s2 height100"><a class="flow-text" href="{{ path('app_contact') }}">Contact</a></li>
+			        {% if is_granted('ROLE_ADMIN') %}
+			        <li class="col s2 height100"><a class="flow-text" href="{{ path('app_admin_home')}}">Admin</a></li>
+			        {% else %}
 			        <li class="col s2 height100"><a class="flow-text" href="{{ path('cv_index')}}">Mes CV</a></li>
+					{% endif %}
 			        <li class="col s2 height100"><a class="flow-text" href="{{ path('app_logout') }}">Logout</a></li>
 		        {% else %}
 		        	<li class="col s3 height100"><a class="flow-text" href="{{ path('app_home') }}" >Accueil</a></li>
@@ -66,7 +70,12 @@
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
             <script src="{{ asset("build/app.js") }}"></script>
             <!-- Compiled and minified JavaScript -->
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>   
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>  
+            <script type="text/javascript">
+            	$(document).ready(function(){
+				    $('.sidenav').sidenav();
+				});
+            </script> 
 	{% endblock %}
   </body>
 </html>

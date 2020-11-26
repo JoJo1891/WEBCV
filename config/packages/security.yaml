@@ -3,6 +3,11 @@ security:
         App\Entity\User:
             algorithm: auto
 
+    role_hierarchy:
+        ROLE_BACK:             [ ]
+        ROLE_USER_ADMIN:     [ ROLE_BACK ]
+        ROLE_ADMIN:          [ ROLE_USER_ADMIN ]        
+
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         # used to reload user from session & other features (e.g. switch_user)
@@ -25,6 +30,7 @@ security:
                 path: app_logout
                 # where to redirect after logout
                 target: /
+            switch_user: true
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
@@ -37,3 +43,5 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/back/*, roles: ROLE_BACK }
+        - { path: ^/back/user, roles: ROLE_ADMIN }
