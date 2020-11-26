@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use \Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * @Route("/back/user")
@@ -23,6 +24,34 @@ class UserController extends AbstractController
         return $this->render('back/user/index.html.twig', [
             'users' => $userRepository->findAll(),
         ]);
+    }
+
+    /**
+    * @Route("/filtre/{val}", name="user_filter", methods={"GET", "POST"})
+    */
+    public function filter($val, UserRepository $userRepository): Response
+    {
+        $vals = [];
+        if($val == "ROLE_ADMIN"){
+            $vals = $userRepository->findAllByRAValue();
+        }
+        else if($val == "ROLE_USER"){
+            $vals = $userRepository->findAllByRUValue();
+        }
+        else if($val == "ROLE_USER_ADMIN"){
+            $vals = $userRepository->findAllByRUAValue();
+        }
+        else if($val == "asc"){
+            $vals = $userRepository->findBy(array(), array('name' => 'ASC'));
+        }
+        else if($val == "desc"){
+            $vals = $userRepository->findBy(array(), array('name' => 'DESC'));
+        }
+
+        return $this->render('back/user/index.html.twig', [
+            'users' => $vals,
+        ]);
+        
     }
 
     /**

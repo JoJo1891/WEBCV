@@ -64,4 +64,36 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         ;
     }
     */
+
+    
+
+    public function findAllByRAValue()
+    {
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.roles LIKE :val')
+            ->setParameter('val', '%"'.'ROLE_ADMIN'.'"%')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function findAllByRUAValue()
+    {
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.roles LIKE :val')
+            ->setParameter('val', '%"'.'ROLE_USER_ADMIN'.'"%')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function findAllByRUValue()
+    {
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.roles LIKE :val')
+            ->setParameter('val', '%"'.'ROLE_USER'.'"%')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 }

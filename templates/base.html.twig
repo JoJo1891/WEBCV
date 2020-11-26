@@ -39,6 +39,7 @@
   	</nav>
     
     {% block body %}{% endblock %} 
+    
 
     <nav class="fixbottom hide-on-large-only">
     	<div class="nav-wrapper grey darken-4">
@@ -74,8 +75,54 @@
             <script type="text/javascript">
             	$(document).ready(function(){
 				    $('.sidenav').sidenav();
+				    $(".dropdown-trigger").dropdown();
 				});
             </script> 
+            <script type="text/javascript">
+            	$(".filtreUser").click(function(){
+                var filt = $(this).attr('val');
+                alert(filt);
+                   	
+                $.ajax({
+                   url : filt,
+                   type : 'POST',
+                   success: function(data) {
+
+                   		alert(data);
+                   		console.log(data);
+                   		
+                		$("#donneeFiltre").remove();
+                		alert(data);
+				        onSuccess(data);   
+				    },
+
+                   error : function(resultat, statut, erreur){
+                   	alert("oups ça marche plus");
+                   }
+
+                });
+                function onSuccess(data) {
+				  let html = "";
+				    html += 
+				    `{% for user in "${data}"%}
+						    <tr>
+						        <td>{{ user.id }}</td>
+						        <td>{{ user.name }}</td>
+						        <td>{{ user.email }}</td>
+						        <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+						        <td>
+						            <a href="{{ path('user_show', {'id': user.id}) }}">show</a>
+						            <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
+						        </td>
+						    </tr>
+						{% else %}
+						{% endfor %}`;
+				  
+				  $('#donneeFiltre').html(html);
+				}
+               
+            });
+        </script>
 	{% endblock %}
   </body>
 </html>

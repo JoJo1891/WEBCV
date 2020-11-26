@@ -10,18 +10,58 @@
             .br20{
                 border-radius: 20px;
             }
+            .container90{
+                width:90%;
+                margin: auto;
+            }
+            .pad5{
+                padding: 5%;
+            }
+            .margtop{
+                position: absolute;
+                top: -100%;
+            }
+            .wd1{
+                width: 200px!important;
+                right:-50px;
+            }
         </style>
     {% endblock %}
 
 {% block body %}
     <div class="grey hfull">
             <div class="row">
-               
-                    <div class="card grey lighten-1 br20 col s10 offset-s1 ">
-                        <h1>Gestion des Utilisateurs</h1>
-                        <div class="container">
+                    <div class="card grey lighten-1 ">
+                        <h1 class="pad5">Gestion des Utilisateurs</h1>
+                        <div class="container90">
                             <div class="row">
-                            <table class="table striped">
+                                
+                                <nav class="grey darken-1">
+                                  <div class="nav-wrapper container90">
+                                    <a href="#!" class="brand-logo">Filtre</a>
+                                    <ul class="right hide-on-med-and-down">
+                                      <li><a class="dropdown-trigger" href="#!" data-target="dropdown2" href="badges.html">Nom<i class=" orange-text material-icons right">arrow_drop_down</i></a></li>
+                                      <!-- Dropdown Trigger -->
+                                      <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Roles<i class="purple-text material-icons right">arrow_drop_down</i></a></li>
+                                    </ul>
+                                  </div>
+                                </nav>
+                                <!-- Dropdown Structure -->
+                                <ul id="dropdown1" class="dropdown-content margtop wd1 grey darken-2">
+                                  <li><a class=" purple-text" href="{{ path('user_filter', {'val': 'ROLE_USER'})}}">ROLE_USER</a></li>
+                                  <li class="divider"></li>
+                                  <li><a class=" purple-text" href="{{ path('user_filter', {'val': 'ROLE_USER_ADMIN'})}}" >ROLE_USER_ADMIN</a></li>
+                                  <li class="divider"></li>
+                                  <li><a class=" purple-text" href="{{ path('user_filter', {'val': 'ROLE_ADMIN'})}}">ROLE_ADMIN</a></li>
+                                </ul>
+                                <ul id="dropdown2" class="dropdown-content margtop wd1 grey darken-2">
+                                  <li><a class=" orange-text" href="{{ path('user_filter', {'val': 'asc'})}}">ASC</a></li>
+                                  <li class="divider"></li>
+                                  <li><a class=" orange-text" href="{{ path('user_filter', {'val': 'desc'})}}">DESC</a></li>
+                                </ul>
+
+                            <div id="donneefiltre">
+                            <table class="table striped br20 col s12 pad5">
                             <thead>
                                 <tr>
                                     <th>Id</th>
@@ -31,32 +71,19 @@
                                     <th>actions</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                            {% for user in users %}
-                                <tr>
-                                    <td>{{ user.id }}</td>
-                                    <td>{{ user.name }}</td>
-                                    <td>{{ user.email }}</td>
-                                    <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-                                    <td>
-                                        <a href="{{ path('user_show', {'id': user.id}) }}">show</a>
-                                        <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
-                                    </td>
-                                </tr>
-                            {% else %}
-                                <tr>
-                                    <td colspan="6">no records found</td>
-                                </tr>
-                            {% endfor %}
-                            </tbody>
+                                <tbody>
+                                        {% include "back/user/loop.html.twig" %} 
+                                </tbody>
+                            
                         </table>
+                                    </div>
                         </div>
                         </div>
                         
                         
 
                         <div class="row">
-                            <a class="left white-text grey wave-light btn large waves-effect" href="{{ path('app_admin_home')}}"><i class="material-icons">cloud</i>Retour Int.Admin</a>
+                            <a class="left white-text grey wave-light btn large waves-effect" href="{{ path('app_admin_home')}}">Retour Int.Admin</a>
                         </div>
                     </div>
                     
@@ -66,5 +93,7 @@
         </div>
     </div>
     
-    
+    {% block javascript %}
+        
+    {% endblock %}
 {% endblock %}
