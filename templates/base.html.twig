@@ -26,8 +26,11 @@
 		    <ul id="nav-mobile" class="right hide-on-med-and-down">
 		    	{% if app.user %}
 			        <li><a class="hoverable" href="{{ path('app_about') }}">A Propos</a></li>
-			        <li><a class="hoverable" href="{{ path('app_contact') }}">Contact</a></li>
+			        <li><a class="hoverable" href="{{ path('app_contact') }}">Contact</a></li>{% if is_granted('ROLE_ADMIN') %}
+			        <li><a class="hoverable" href="{{ path('app_admin_home')}}">Admin</a></li>
+			        {% else %}
 			        <li><a class="hoverable" href="{{ path('cv_index')}}">Mes CV</a></li>
+					{% endif %}
 			        <li><a class="hoverable" href="{{ path('app_logout') }}">Logout</a></li>
 		        {% else %}
 			        <li><a class="hoverable" href="{{ path('app_about') }}">A Propos</a></li>
@@ -79,48 +82,23 @@
 				});
             </script> 
             <script type="text/javascript">
-            	$(".filtreUser").click(function(){
-                var filt = $(this).attr('val');
-                alert(filt);
+            	$("#btnsearch").click(function(){
+                var val = $("#search").val();
+                alert(val);
+                var ur = Routing.generate('search_cv_searchcv', {'q': val });
+                alert(ur);
                    	
                 $.ajax({
-                   url : filt,
-                   type : 'POST',
+                   url : ur,
+                   type : 'GET',
                    success: function(data) {
-
-                   		alert(data);
-                   		console.log(data);
-                   		
-                		$("#donneeFiltre").remove();
-                		alert(data);
-				        onSuccess(data);   
-				    },
+				            },
 
                    error : function(resultat, statut, erreur){
                    	alert("oups ça marche plus");
                    }
 
                 });
-                function onSuccess(data) {
-				  let html = "";
-				    html += 
-				    `{% for user in "${data}"%}
-						    <tr>
-						        <td>{{ user.id }}</td>
-						        <td>{{ user.name }}</td>
-						        <td>{{ user.email }}</td>
-						        <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-						        <td>
-						            <a href="{{ path('user_show', {'id': user.id}) }}">show</a>
-						            <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
-						        </td>
-						    </tr>
-						{% else %}
-						{% endfor %}`;
-				  
-				  $('#donneeFiltre').html(html);
-				}
-               
             });
         </script>
 	{% endblock %}

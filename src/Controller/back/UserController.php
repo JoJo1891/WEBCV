@@ -55,6 +55,38 @@ class UserController extends AbstractController
     }
 
     /**
+    * @Route("/{id}/switch/{roles}", name="switch_role", methods={"GET", "POST"})
+    */
+    public function switchRole($roles, UserRepository $userRepository, User $user, $id): Response
+    {
+        $role = "";
+        $vals = [];
+        if($roles == "ROLE_ADMIN"){
+            $role = ["ROLE_ADMIN"];
+            $vals = $userRepository->findAllByRAValue();
+        }
+        else if($roles == "ROLE_USER"){
+            $role = ["ROLE_USER"];
+            $vals = $userRepository->findAllByRUValue();
+        }
+        else if($roles == "ROLE_USER_ADMIN"){
+            $role = ["ROLE_USER_ADMIN"];
+            $vals = $userRepository->findAllByRUAValue();
+        }
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $usr = $userRepository->findOneById($id);
+        $usr->setRoles($role);
+        $entityManager->persist($usr);
+        $entityManager->flush();
+
+        return $this->render('back/user/index.html.twig', [
+            'users' => $userRepository->findAll(),
+        ]);
+
+    }
+
+    /**
      * @Route("/new", name="user_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
@@ -74,16 +106,6 @@ class UserController extends AbstractController
         return $this->render('back/user/new.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
-        ]);
-    }
-
-    /**
-     * @Route("/{id}", name="user_show", methods={"GET"})
-     */
-    public function show(User $user): Response
-    {
-        return $this->render('back/user/show.html.twig', [
-            'user' => $user,
         ]);
     }
 

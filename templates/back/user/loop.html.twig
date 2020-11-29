@@ -5,7 +5,19 @@
         <td>{{ user.email }}</td>
         <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
         <td>
-            <a href="{{ path('user_show', {'id': user.id}) }}">show</a>
+            {% if user.roles[0] == "ROLE_USER" %}
+                <a href="#!"><i class="medium material-icons blue-text text-lighten-4">person</i></a>
+                <a href="{{ path('switch_role', {'id': user.id, 'roles': 'ROLE_USER_ADMIN'})}}"><i class="material-icons teal-text text-lighten-4">person</i></a>
+                <a href="{{ path('switch_role', {'id': user.id, 'roles': 'ROLE_ADMIN'})}}"><i class="material-icons lime-text text-accent-2">person</i></a>
+            {% elseif user.roles[0]  == "ROLE_USER_ADMIN" %}
+                <a href="{{ path('switch_role', {'id': user.id, 'roles': 'ROLE_USER'})}}"><i class="material-icons blue-text text-lighten-4">person</i></a>
+                <a href="#!"><i class="medium material-icons teal-text text-lighten-4">person</i></a>
+                <a href="{{ path('switch_role', {'id': user.id, 'roles': 'ROLE_ADMIN'})}}"><i class="material-icons lime-text text-accent-2">person</i></a>
+            {% elseif user.roles[0]  == "ROLE_ADMIN" %}
+                <a href="{{ path('switch_role', {'id': user.id, 'roles': 'ROLE_USER'})}}"><i class="material-icons blue-text text-lighten-4">person</i></a>
+                <a href="{{ path('switch_role', {'id': user.id, 'roles': 'ROLE_USER_ADMIN'})}}"><i class="material-icons teal-text text-lighten-4">person</i></a>
+                <a href="#!"><i class="medium material-icons lime-text text-accent-2">person</i></a>
+            {% endif %}
             <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
         </td>
     </tr>

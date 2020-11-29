@@ -19,7 +19,7 @@
 			{% if is_granted('ROLE_ADMIN') %}
 				<li><a class="white-text waves-effect" href="{{ path('user_index')}}"><i class="material-icons">cloud</i>Admin User</a></li>
 			{% endif %}
-			<li><a class="white-text waves-effect" href="#!"><i class="material-icons">cloud</i>Recherche CV</a></li>			    
+			<li><a class="white-text waves-effect" href="{{ path('app_admin_search_cv')}}"><i class="material-icons">cloud</i>Recherche CV</a></li>			    
 		</ul>
 					  
 				

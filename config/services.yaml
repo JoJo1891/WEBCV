@@ -11,6 +11,16 @@ services:
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        bind:
+            $cvFinder: '@fos_elastica.finder.cv'
+            $certificateFinder: '@fos_elastica.finder.certificate'
+            $centerinterestFinder: '@fos_elastica.finder.centerinterest'
+            $contactinformationFinder: '@fos_elastica.finder.contactinformation'
+            $infospersoFinder: '@fos_elastica.finder.infosperso'
+            $langueFinder: '@fos_elastica.finder.langue'
+            $professionalcourseFinder: '@fos_elastica.finder.professionalcourse'
+            $skillsFinder: '@fos_elastica.finder.skills'
+            $trainingFinder: '@fos_elastica.finder.training'
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name

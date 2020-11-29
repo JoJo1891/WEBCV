@@ -1,0 +1,10 @@
+{{ form_start(form) }}
+    {#{ form_widget(form) }#}
+    <div class="row">
+          <div class="input-field col s8 offset-s2">
+          {{ form_row(form.search) }}
+          {{ form_row(form.save)}}
+        </div>
+      </div>
+      
+{{ form_end(form) }}
