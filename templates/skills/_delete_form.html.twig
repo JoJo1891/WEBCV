@@ -1,4 +1,4 @@
-<form method="post" action="{{ path('skills_delete', {'id': skill.id, 'idcv': cv}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+<form method="post" action="{{ path('skills_delete', {'id': skill.id, 'idcv': cv}) }}" onsubmit="return confirm('Etes-vous sûr de vouloir supprimer cette compétence?');">
     <input type="hidden" name="_method" value="DELETE">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ skill.id) }}">
     <div class="row right">

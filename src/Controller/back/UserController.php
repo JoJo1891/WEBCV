@@ -6,13 +6,19 @@ use App\Entity\User;
 use App\Form\User1Type;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use \Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
+use Symfony\Component\Mime\Address;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 
 /**
  * @Route("/back/user")
+ * @IsGranted("ROLE_ADMIN")
  */
 class UserController extends AbstractController
 {
@@ -57,7 +63,7 @@ class UserController extends AbstractController
     /**
     * @Route("/{id}/switch/{roles}", name="switch_role", methods={"GET", "POST"})
     */
-    public function switchRole($roles, UserRepository $userRepository, User $user, $id): Response
+    public function switchRole($roles, UserRepository $userRepository, User $user, $id, MailerInterface $mailer): Response
     {
         $role = "";
         $vals = [];
@@ -79,6 +85,18 @@ class UserController extends AbstractController
         $usr->setRoles($role);
         $entityManager->persist($usr);
         $entityManager->flush();
+
+        $email = (new TemplatedEmail())
+            ->from(new Address('joel.sylvius18@gmail.com', 'WEB CV Informations'))
+            ->to($usr->getEmail())
+            ->subject('Changement de privilège')
+            ->htmlTemplate('back/user/email.html.twig')
+            ->context([
+                'role' => $role[0],
+            ])
+        ;
+
+        $mailer->send($email);
 
         return $this->render('back/user/index.html.twig', [
             'users' => $userRepository->findAll(),

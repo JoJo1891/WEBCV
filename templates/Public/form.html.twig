@@ -1,0 +1,31 @@
+{{ form_start(form) }}
+    {#{ form_widget(form) }#}
+    <div class="row"> 
+    		<div class="card br20 white col s8 offset-s2">
+    			<div class="container">
+    				<div class="row">
+	    				<div class="input-field col s4">
+							{{ form_row(form.name) }}
+						</div>
+						<div class="input-field col s8">
+		          			{{ form_row(form.email) }}
+	    				</div>
+	    			</div>
+		          	<div class="row">
+		          		<div class="input-field col s6 offset-s3">
+							{{ form_row(form.objet) }}
+		          		</div>
+		          	</div>
+		          	<div class="row">
+		          		<div class="input-field ">
+			          		{{ form_row(form.message) }}
+			          	</div>
+			        </div>
+			        <div class="row center-align">
+			          		{{ form_row(form.save)}}
+		          	</div>
+    			</div>
+	        </div>
+      </div>
+      
+{{ form_end(form) }}

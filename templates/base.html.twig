@@ -15,6 +15,20 @@
     	.height100{
  			height: 100%!important;
     	}
+      .contentshome{
+        position: absolute;
+        width: 80%;
+        top: 20vh;
+        left: 10%;
+      }
+      .hfull{
+        padding-top: 10vh;
+        padding-bottom: 10vh;
+        height: 120vh;
+      }
+      .br20{
+        border-radius: 20px;
+      }
     </style>
     {% block stylesheets %}
     {% endblock %}
@@ -22,7 +36,7 @@
   <body>
   	<nav>
     	<div class="nav-wrapper grey darken-4">
-		    <a href="{{ path('app_home') }}" class="brand-logo">Web CV</a>
+		    <a href="{{ path('app_home') }}" class="brand-logo">.Web CV</a>
 		    <ul id="nav-mobile" class="right hide-on-med-and-down">
 		    	{% if app.user %}
 			        <li><a class="hoverable" href="{{ path('app_about') }}">A Propos</a></li>
@@ -76,30 +90,22 @@
             <!-- Compiled and minified JavaScript -->
             <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>  
             <script type="text/javascript">
-            	$(document).ready(function(){
-				    $('.sidenav').sidenav();
-				    $(".dropdown-trigger").dropdown();
-				});
+            $(document).ready(function(){
+				      $('.sidenav').sidenav();
+				      $(".dropdown-trigger").dropdown();
+              $('.carousel.carousel-slider').carousel({
+                fullWidth: true,
+                indicators: true
+              });
+              autoplay()   
+              function autoplay() {
+                     $('.carousel').carousel('next');
+                     setTimeout(autoplay, 6500);
+              }
+				    });
+            
             </script> 
-            <script type="text/javascript">
-            	$("#btnsearch").click(function(){
-                var val = $("#search").val();
-                alert(val);
-                var ur = Routing.generate('search_cv_searchcv', {'q': val });
-                alert(ur);
-                   	
-                $.ajax({
-                   url : ur,
-                   type : 'GET',
-                   success: function(data) {
-				            },
-
-                   error : function(resultat, statut, erreur){
-                   	alert("oups ça marche plus");
-                   }
-
-                });
-            });
+            
         </script>
 	{% endblock %}
   </body>
