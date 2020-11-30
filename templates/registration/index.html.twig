@@ -1,0 +1,41 @@
+{# templates/registration/index.html.twig #} {% extends 'base.html.twig' %} {%
+block body %}
+<div class="container">
+  	<div class="row">
+  		<div class="card br20 blue-grey lighten-5 center-align">
+  			<h1>Formulaire d'inscription</h1>
+  			{{ form_start(form) }}
+		        <div class="row">
+        			<div class="input-field col s6 offset-s3">
+              			{{ form_row(form.name, {'attr': {'class': 'validate'}}) }}
+            		</div>
+          		</div>
+		        <div class="row">
+        			<div class="input-field col s6 offset-s3">
+              			{{ form_row(form.email, {'attr': {'class': 'validate'}}) }}
+              		</div>
+              	</div>
+          		<div class="row">
+        			<div class="input-field col s6 offset-s3">
+		              {{ form_row(form.password.first, {'attr': {'class':
+		              'validate'}}) }}
+		            </div>
+		        </div>
+          		<div class="row">
+        			<div class="input-field col s6 offset-s3">
+		              {{ form_row(form.password.second, {'attr': {'class':
+		              'validate'}}) }}
+		            </div>
+		        </div>
+          		<div class="row">
+        			<div class="input-field col s6 offset-s3">
+              			<button type="submit" class="btn btn-large waves-effect waves-light">
+                			<i class="material-icons right">assignment_turned_in</i> S'inscrire
+              			</button>
+            		</div>
+          		</div>
+          	{{ form_end(form) }}
+  		</div>
+  	</div>
+</div>
+{% endblock %}

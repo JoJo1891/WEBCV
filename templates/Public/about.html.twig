@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+{% block title %}A propos Web CV{% endblock %} 
+{% block stylesheets %}
+	<style type="text/css">
+		@keyframes tipsy {
+		  0 {
+		    transform: translateX(-50%) translateY(-50%) rotate(0deg);
+		  }
+		  100% {
+		    transform: translateX(-50%) translateY(-50%) rotate(360deg);
+		  }
+		}
+
+		body {
+		  font-family: helvetica, arial, sans-serif;
+		  background-color: #2e2e31;
+		}
+
+		.tit{
+		  color: #fffbf1;
+		  text-shadow: 0 20px 25px #2e2e31, 0 40px 60px #2e2e31;
+		  font-size: 80px;
+		  font-weight: bold;
+		  text-decoration: none;
+		  letter-spacing: -3px;
+		  margin: 0;
+		  position: absolute;
+		  top: 50%;
+		  left: 50%;
+		  transform: translateX(-50%) translateY(-50%);
+		}
+
+		.tit:before,
+		.tit:after {
+		  content: '';
+		  padding: .9em .4em;
+		  position: absolute;
+		  left: 50%;
+		  width: 100%;
+		  top: 50%;
+		  display: block;
+		  border: 15px solid red;
+		  transform: translateX(-50%) translateY(-50%) rotate(0deg);
+		  animation: 10s infinite alternate ease-in-out tipsy;
+		}
+
+		.tit:before {
+		  border-color: #d9524a #d9524a rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
+		  z-index: -1;
+		}
+
+		.tit:after {
+		  border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) #d9524a #d9524a;
+		  box-shadow: 25px 25px 25px rgba(46, 46, 49, .8);
+		}
+		.titlepage{
+        font-size: 120px;
+      	}
+      	.textunder{
+      		margin-top: 50vh;
+      		text-shadow: 1px 1px 2px #000000;
+      		text-align: justify;
+      	}
+	</style>
+{% endblock %}
+{% block body %}
+<div class="amber hfull">
+	<div class="container">
+		<div class="row center-align">
+			<h1 class="titlepage"><a class="tit" href="#!">A propos Web CV</a></h1>
+		</div>
+		<div class="row">
+			<p class="flow-text textunder white-text">
+				Vous souhaitez faire votre curriculum vitea ?
+				Mais vous ne savez pas par où commencer? <br><br>
+				Quelles informations mettrent dessus? 
+				Vous ne s'avez pas non plus comment les placer? <br><br>
+				WEB CV est la réponse à tout vos quetions!
+				Inscrivez-vous et créer votre premier cv! <br><br>
+				Ajouter les informations et visualiser votre Curriculum vitea comme en vrai!<br><br>
+				WEB CV est en cours de développement et de multiples options sont à venir!   
+			</p>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,82 @@
+# Read the documentation: https://github.com/FriendsOfSymfony/FOSElasticaBundle/blob/master/doc/setup.md
+fos_elastica:
+    clients:
+        default: { host: localhost , port: 9200 }
+    indexes :
+        cv:
+            properties:
+                id: ~
+                name: ~
+            persistence:
+                driver: orm
+                model: App\Entity\Cv
+        certificate:
+            properties:
+                id: ~
+                name: ~
+            persistence:
+                driver: orm
+                model: App\Entity\Certificate
+        centerinterest:
+            properties:
+                id: ~
+                name: ~
+            persistence:
+                driver: orm
+                model: App\Entity\CenterInterest
+        contactinformation:
+            properties:
+                id: ~
+                adresse: ~
+                numero: ~
+                email: ~
+            persistence:
+                driver: orm
+                model: App\Entity\ContactInformation
+        infosperso:
+            properties:
+                id: ~
+                firstname: ~
+                name: ~
+                jobtitle: ~
+            persistence:
+                driver: orm
+                model: App\Entity\InfosPerso
+        langue:
+            properties:
+                id: ~
+                name: ~
+            persistence:
+                driver: orm
+                model: App\Entity\Langue
+        professionalcourse:
+            properties:
+                id: ~
+                title: ~
+                city: ~
+                period: ~
+                skillsacquired: ~
+                description: ~
+            persistence:
+                driver: orm
+                model: App\Entity\ProfessionalCourse
+        skills:
+            properties:
+                id: ~
+                name: ~
+            persistence:
+                driver: orm
+                model: App\Entity\Skills
+        training:
+            properties:
+                id: ~
+                diplomatitle: ~
+                school: ~
+                city: ~
+                yearofgraduation: ~
+            persistence:
+                driver: orm
+                model: App\Entity\Training
+
+
+            

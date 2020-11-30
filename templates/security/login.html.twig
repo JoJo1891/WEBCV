@@ -1,0 +1,68 @@
+{# templates/security/login.html.twig #} {% extends 'base.html.twig' %} {% block
+title %}Connexion{% endblock %} {% block body %}
+<div class="container">
+    <div class="row">
+      <div class="card br20 blue-grey lighten-5 center-align">
+        <h1>Connexion WEB CV !</h1>
+            <form class="form-horizontal" role="form" method="post">
+              {% if error %}
+              <div class="alert alert-danger">
+                {{ error.messageKey|trans(error.messageData, 'security') }}
+              </div>
+              {% endif %} {% if app.user %}
+              <div class="mb-3">
+                You are logged in as {{ app.user.username }},
+                <a href="{{ path('app_logout') }}">Logout</a>
+              </div>
+              {% endif %}
+              <div class="row">
+              <div class="input-field col s6 offset-s3">
+                <label for="email">Email</label>
+                  <input
+                    id="inputEmail"
+                    type="email"
+                    class="validate"
+                    name="email"
+                    value="{{ last_username }}"
+                    required
+                    autofocus
+                  />
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s6 offset-s3">
+                <label for="password">Mot de passe</label>
+                  <input
+                    id="inputPassword"
+                    type="password"
+                    class="validate"
+                    name="password"
+                    required
+                  />              </div>
+            </div>
+              <input
+                type="hidden"
+                name="_csrf_token"
+                value="{{ csrf_token('authenticate') }}"
+              />
+              <div class="form-group">
+                <div class="col-md-12">
+                  <button type="submit" class="btn btn-large waves-effect waves-light">
+                      <i class="material-icons right">assignment_turned_in</i> Connexion
+                  </button>
+                </div>
+              </div>
+            </form>
+            <div class="row">
+              <p>Mot de passe oublier ? <a href="{{ path('app_forgot_password_request') }}">cliquer ici</a></p>
+            </div>
+
+            <div class="row">
+              <p>Vous n'êtes pas encore inscrit, cliquer ici : <a href="{{ path('registration') }}">Inscription</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    
+{% endblock %}

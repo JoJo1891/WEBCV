@@ -1,0 +1,103 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User index{% endblock %}
+    {% block stylesheets %}
+        <style type="text/css">
+            .hfull{
+                height: 100vh;
+                padding-top: 40px;
+            }
+            .br20{
+                border-radius: 20px;
+            }
+            .container90{
+                width:90%;
+                margin: auto;
+            }
+            .pad5{
+                padding: 2%;
+            }
+            .margtop{
+                position: absolute;
+                top: -100%;
+            }
+            .wd1{
+                width: 200px!important;
+                right:-50px;
+            }
+        </style>
+    {% endblock %}
+
+{% block body %}
+    <div class="grey hfull">
+            <div class="row">
+                    <div class="card grey lighten-1 ">
+                        <h1 class="pad5">Gestion des Utilisateurs</h1>
+                        <div class="container90">
+                            <div class="row">
+                                <p class="flow-text">Pour modifier le rôle d'un utilisateur, cliquer sur les icônes correspondant au rôle que vous souhaitez attribuer à celui-ci : </p>
+                                <p><i class="material-icons blue-text text-lighten-4">person</i> Pour le "ROLE_USER" </p>
+                                <p><i class="material-icons teal-text text-lighten-4">person</i> Pour le "ROLE_USER_ADMIN" </p>
+                                <p><i class="material-icons lime-text text-accent-2">person</i> Pour le "ROLE_ADMIN" </p>
+                                <p class="flow-text">Un mail sera envoyer à l'utilisateur lui informant que sont status à changer.</p>
+                                <nav class="grey darken-1">
+                                  <div class="nav-wrapper container90">
+                                    <a href="#!" class="brand-logo">Filtre</a>
+                                    <ul class="right hide-on-med-and-down">
+                                      <li><a class="dropdown-trigger" href="#!" data-target="dropdown2" href="badges.html">Nom<i class=" orange-text material-icons right">arrow_drop_down</i></a></li>
+                                      <!-- Dropdown Trigger -->
+                                      <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Roles<i class="purple-text material-icons right">arrow_drop_down</i></a></li>
+                                    </ul>
+                                  </div>
+                                </nav>
+                                <!-- Dropdown Structure -->
+                                <ul id="dropdown1" class="dropdown-content margtop wd1 grey darken-2">
+                                  <li><a class=" purple-text" href="{{ path('user_filter', {'val': 'ROLE_USER'})}}">ROLE_USER</a></li>
+                                  <li class="divider"></li>
+                                  <li><a class=" purple-text" href="{{ path('user_filter', {'val': 'ROLE_USER_ADMIN'})}}" >ROLE_USER_ADMIN</a></li>
+                                  <li class="divider"></li>
+                                  <li><a class=" purple-text" href="{{ path('user_filter', {'val': 'ROLE_ADMIN'})}}">ROLE_ADMIN</a></li>
+                                </ul>
+                                <ul id="dropdown2" class="dropdown-content margtop wd1 grey darken-2">
+                                  <li><a class=" orange-text" href="{{ path('user_filter', {'val': 'asc'})}}">ASC</a></li>
+                                  <li class="divider"></li>
+                                  <li><a class=" orange-text" href="{{ path('user_filter', {'val': 'desc'})}}">DESC</a></li>
+                                </ul>
+
+                            <div id="donneefiltre">
+                            <table class="table striped br20 col s12 pad5">
+                            <thead>
+                                <tr>
+                                    <th colspan="10%">Id</th>
+                                    <th colspan="15%">Name</th>
+                                    <th colspan="15%">Email</th>
+                                    <th colspan="15%">Roles</th>
+                                    <th colspan="45%">actions</th>
+                                </tr>
+                            </thead>
+                                <tbody>
+                                        {% include "back/user/loop.html.twig" %} 
+                                </tbody>
+                            
+                        </table>
+                                    </div>
+                        </div>
+                        </div>
+                        
+                        
+
+                        <div class="row">
+                            <a class="left white-text grey wave-light btn large waves-effect" href="{{ path('app_admin_home')}}">Retour Int.Admin</a>
+                        </div>
+                    </div>
+                    
+
+                    
+            </div>
+        </div>
+    </div>
+    
+    {% block javascript %}
+        
+    {% endblock %}
+{% endblock %}

@@ -1,0 +1,268 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cv{% endblock %}
+    {% block stylesheets %}
+        <style type="text/css">
+            hr.style1 { 
+              border: 0; 
+              height: 1px; 
+              background-image: -webkit-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+              background-image: -moz-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+              background-image: -ms-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+              background-image: -o-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0); 
+            }
+            .br20{
+                border-radius: 20px!important;
+            }
+            .sous-titre{
+                font-size: 20px;
+            }
+            .description{
+                font-size: 15px;
+            }
+            .carre{
+                width: 150px;
+                height: 150px;
+                border-radius: 50%;
+                margin: auto;
+                overflow: hidden;
+            }
+            .magin-top{
+                margin-top: 20px;
+            }
+        </style>
+    {% endblock %}
+
+{% block body %}
+    <div class=" blue darken-4">
+        <div class="container">
+        <div class="row">
+            <div class="right-align col s12">
+                <div class="row magin-top">
+                    {% if is_granted('ROLE_BACK') %}
+                        <a class="left blue waves-effect waves-light  btn-large" style="magin-top: 20px" href="{{ path('app_admin_search_cv') }}"><i class="material-icons right">arrow_back</i> Retour à la recherche des CV</a>
+                    {% else %}
+                        <a class="left blue waves-effect waves-light  btn-large" style="magin-top: 20px" href="{{ path('cv_index') }}"><i class="material-icons right">arrow_back</i> Retour à mes CV</a>
+                    {% endif %}
+                    
+
+                </div>
+            </div>
+            <div class="left-align col s12 white-text">
+                <h1>{{ cv.name }}
+                    {% if is_granted('ROLE_BACK') %}
+                                {% else %}
+                                    <a href="{{ path('cv_edit', {'id': cv.id}) }}"><i class=" small green-text material-icons">edit</i></a></h1>
+                                {% endif %}
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="card br20 blue-grey lighten-5">
+                <div class="row br20">
+                    <div class="card-content grey lighten-4 col s12 m3 l3 br20">
+                        <div class="row center-align">
+                            {% for infos_perso in ips %}
+                                {% if infos_perso.avatarFilename == false %}
+                                    <div class="carre">
+                                    <img src="{{ asset('uploads/avatars/blank-avatar.png') }}" alt="" class=" responsive-img">
+                                </div>
+                                {% else %}
+                                    <div class="carre">
+                                    <img src="{{ asset('uploads/avatars/'~ infos_perso.avatarFilename ~'') }}" alt="" class=" responsive-img">
+                                </div>
+                                {% endif %}
+                                
+                                
+                                <h2>{{ infos_perso.firstname}} {{ infos_perso.name}}</h2>
+                        
+                                <p class="flow-text">{{ infos_perso.jobtitle}}
+
+                                {% if is_granted('ROLE_BACK') %}
+                                {% else %}
+                                    <a class="green waves-effect waves-light btn-floating" href="{{ path('infos_perso_edit', {'id': infos_perso.id,'idcv': cv.id}) }}"><i class="material-icons right">edit</i></a>
+
+                                    {% endif %}
+                                </p>
+                            {% else %}
+                                <p>Aucune information personnelle?
+                                    Ajouter en cliquant</p>
+                                    {% if is_granted('ROLE_BACK') %}
+                                {% else %}
+                                <a class="green waves-effect waves-light btn-floating" href="{{ path('infos_perso_new', {'idcv': cv.id}) }}"><i class="material-icons right">add</i></a>
+                            {% endif %}
+                                
+                            {% endfor %}
+                        </div>
+                        <div class="row">
+                            <p class="flow-text">Coordonnées<hr class="grey style1"></p>
+                            
+
+                            {% for contact_information in cis %}
+
+                                <p><i class="tiny material-icons">location_on</i>{{ contact_information.adresse}}</p>
+                                
+                                <p><i class="tiny material-icons">phone</i>{{ contact_information.numero}}</p>
+
+                                <p><i class="tiny material-icons">mail</i>{{ contact_information.email}}</p>
+
+                                {% if is_granted('ROLE_BACK') %}
+                                {% else %}
+                                    <a class="green waves-effect waves-light btn-floating" href="{{ path('contact_information_edit', {'id': contact_information.id,'idcv': cv.id}) }}"><i class="material-icons right">edit</i></a>
+                                {% endif %}
+                            {% else %}
+                                <p>Aucune coordonnées?
+                                    Ajouter en cliquant</p>
+
+                                {% if is_granted('ROLE_BACK') %}
+                                {% else %}
+                                    <a class="green waves-effect waves-light btn-floating" href="{{ path('contact_information_new', {'idcv': cv.id}) }}"><i class="material-icons right">add</i></a>
+                                {% endif %}
+                                        
+                            {% endfor %}
+                        </div>
+                        <div class="row">
+                            <p class="flow-text">Compétences<hr class="grey style1"></p>
+
+                            {% for skill in skills %}
+                                <div class="chip">
+                                    <p><i class="tiny material-icons">developer_board</i>{{ skill.name }} 
+                                        {% if is_granted('ROLE_BACK') %}
+                                {% else %}<a href="{{ path('skills_edit', {'id': skill.id,'idcv': cv.id}) }}"><i class="green-text material-icons right">edit</i></a></p>
+                                {% endif %}
+                                </div>
+                                    
+                                        
+                                    
+                            {% else %}
+                               
+                                    <p>Aucune Compétences?
+                                    Ajouter en cliquant</p>
+                                    
+                            {% endfor %}
+                            {% if is_granted('ROLE_BACK') %}
+                                {% else %}
+                                    <a class="green waves-effect waves-light btn-floating" href="{{ path('skills_new', {'idcv': cv.id}) }}"><i class="material-icons right">add</i></a>
+                                {% endif %}
+                        </div>
+                        <div class="row">
+                            <p class="flow-text">Langues<hr class="grey style1"></p>
+
+                            {% for langue in langues %}
+                                <div class="chip">
+                                    <p><i class="tiny material-icons">chat_bubble</i>{{ langue.name }}
+                                        {% if is_granted('ROLE_BACK') %}
+                                {% else %}
+                                    <a href="{{ path('langue_edit', {'id': langue.id,'idcv': cv.id}) }}"><i class="green-text material-icons">edit</i></a></p>
+                                {% endif %}
+                                </div>
+                            {% else %}
+                            
+                                <p>Aucune langues?
+                                    Ajouter en cliquant</p>
+                        
+                            {% endfor %}
+                            {% if is_granted('ROLE_BACK') %}
+                                {% else %}
+                                    <a class="green waves-effect waves-light btn-floating" href="{{ path('langue_new', {'idcv': cv.id}) }}"><i class="material-icons right">add</i></a>
+                                {% endif %}
+                        </div>
+                        <div class="row">
+                            <p class="flow-text">Certifications<hr class="grey style1"></p>
+
+                            {% for certificate in certificates %}
+                                <div class="chip">
+                                    <p><i class="tiny material-icons">class</i>{{ certificate.name }}
+                                        {% if is_granted('ROLE_BACK') %}
+                                {% else %}<a href="{{ path('certificate_edit', {'id': certificate.id,'idcv': cv.id}) }}"><i class="green-text material-icons">edit</i></a>
+                                {% endif %}</p>
+                                </div>
+                            {% else %}
+                                
+                                    <p>Aucune certification?
+                                    Ajouter en cliquant</p>
+                                   
+                            {% endfor %}
+                            {% if is_granted('ROLE_BACK') %}
+                                {% else %}
+                                    <a class="green waves-effect waves-light btn-floating" href="{{ path('certificate_new', {'idcv': cv.id}) }}"><i class="material-icons right">add</i></a>
+                                {% endif %}
+                        </div>
+                        <div class="row">
+                            <p class="flow-text">Centre d'intérêts<hr class="grey style1"></p>
+
+                            {% for center_interest in center_interests %}
+                                <div class="chip">
+                                    <p><i class="tiny material-icons">extension</i>{{ center_interest.name }}
+                                        {% if is_granted('ROLE_BACK') %}
+                                {% else %}
+                                    <a href="{{ path('center_interest_edit', {'id': center_interest.id,'idcv': cv.id}) }}"><i class="green-text material-icons">edit</i></a>
+                                {% endif %}</p>
+                                </div>
+                                    
+                            {% else %}
+                                    <p>Aucune information personnelle?
+                                    Ajouter en cliquant</p>
+                                    
+                            {% endfor %}
+                            {% if is_granted('ROLE_BACK') %}
+                                {% else %}
+                                    <a class="green waves-effect waves-light btn-floating" href="{{ path('center_interest_new', {'idcv': cv.id}) }}"><i class="material-icons right">add</i></a>
+                                {% endif %}
+                        </div>
+
+                    </div>
+                    
+                    <div class="card-content blue-grey lighten-5 col s12 m9 l9 br20">
+                        <div class="row">
+                            <p class="flow-text">Formations<hr class="grey style1"></p>
+
+                            {% for training in trainings %}
+                                <p class="flow-text"><i class="small material-icons">school</i> {{ training.diplomatitle }} - {{ training.school }}</p>
+                                <p class="sous-titre">{{ training.city }} - {{ training.yearofgraduation }}
+                                    {% if is_granted('ROLE_BACK') %}
+                                {% else %}
+                                        <a href="{{ path('training_edit', {'id': training.id,'idcv': cv.id}) }}"><i class="green-text material-icons">edit</i></a>
+                                    {% endif %}
+                                    </p>
+                            {% else %}
+                                    <p>Aucune Formation?
+                                    Ajouter en cliquant</p>
+                            {% endfor %}
+                            {% if is_granted('ROLE_BACK') %}
+                                {% else %}
+                                    <a class="green waves-effect waves-light btn-floating" href="{{ path('training_new', {'idcv': cv.id}) }}"><i class="material-icons right">add</i></a>
+                                {% endif %}
+                        </div>
+                        <div class="row">
+                            <p class="flow-text">Expériences Professionels<hr class="grey style1"></p>
+
+                            {% for professional_course in professional_courses %}
+                                <p class="flow-text"><i class="small material-icons">work</i> {{ professional_course.title }} - {{ professional_course.city }}</p>
+                                <p class="sous-titre">{{ professional_course.skillsacquired }} - {{ professional_course.period }}</p>
+                                <p class="description">{{ professional_course.description }}
+                                    {% if is_granted('ROLE_BACK') %}
+                                {% else %}
+                                    <a href="{{ path('professional_course_edit', {'id': professional_course.id,'idcv': cv.id}) }}"><i class="green-text material-icons">edit</i></a>
+                                {% endif %}</p>
+                                
+                            {% else %}
+                                    <p><p>Aucune expérience professionnelle?
+                                    Ajouter en cliquant</p></p>
+                            {% endfor %}
+                            {% if is_granted('ROLE_BACK') %}
+                                {% else %}
+                                    <a class="green waves-effect waves-light btn-floating" href="{{ path('professional_course_new', {'idcv': cv.id}) }}"><i class="material-icons right">add</i></a>
+                                {% endif %}
+                        </div>
+                    </div>
+                </div>
+              </div>
+
+        </div>
+    </div>
+    </div>    
+{% endblock %}
