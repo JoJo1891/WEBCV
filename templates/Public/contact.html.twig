@@ -60,6 +60,7 @@
       		margin-top: 50vh;
       		text-shadow: 1px 1px 2px #000000;
       		text-align: justify;
+      		padding-top: 30vh;
       	}
 	</style>
 {% endblock %}
@@ -69,18 +70,21 @@
 <div class="light-blue hfull">
 	<div class="container">
 		<div class="row center-align">
-			<h1 class="titlepage"><a class="tit" href="#!">Contact</a></h1>
+			<h1 class="titlepage tit">Contact</h1>
 		</div>
-		<div class="row">
-			<p class="flow-text textunder white-text">
+		<div class="row textunder">
+			<div class="col s4">
+				<p class="flow-text white-text">
 				Vous souhaitez nous faire part d'erreur sur le site?<br>
-				De fonctionnalité que vous souhaiteriez voir sur le site ?<br>
-				N'hésiter pas à nous envoyer un mail à partir du formulaire ci-dessous? <br><br>
-				Nous Répondrons des les plus brefs délais!
+				De fonctionnalité que vous souhaiteriez voir sur celui-ci ?<br><br>
+				N'hésiter pas à nous envoyer un mail à partir du formulaire. <br><br>
+				Nous Répondrons dans les plus brefs délais!
+				</p>
 
+			</div>
+			<div class="col s8">
 				{% include 'public/form.html.twig' %}
-				
-			</p>
+			</div>
 		</div>
 	</div>
 </div>

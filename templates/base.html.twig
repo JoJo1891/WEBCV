@@ -6,7 +6,19 @@
     <title>{% block title %}Welcome!{% endblock %}</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com"> 
+<link href="https://fonts.googleapis.com/css2?family=Istok+Web&family=Thasadith&display=swap" rel="stylesheet">
     <style type="text/css">
+      h1, h2{
+        font-family: 'Thasadith', sans-serif;
+      }
+      .t1, h3 pre{
+        font-size: 80px!important
+        text-shadow: 2px 2px 10px #000000!important;
+      }
+      p, input, button, a, label{
+        font-family: 'Istok Web', sans-serif;
+      }
     	.fixbottom{
     		position: absolute;
     		bottom: 0;
@@ -24,19 +36,23 @@
       .hfull{
         padding-top: 10vh;
         padding-bottom: 10vh;
-        height: 120vh;
+        min-height: 93vh;
       }
       .br20{
         border-radius: 20px;
+      }
+      .container90{
+        width: 90%;
+        margin: auto;
       }
     </style>
     {% block stylesheets %}
     {% endblock %}
   </head>
   <body>
-  	<nav>
-    	<div class="nav-wrapper grey darken-4">
-		    <a href="{{ path('app_home') }}" class="brand-logo">.Web CV</a>
+  	<nav class="grey darken-4">
+    	<div class="nav-wrapper container90">
+		    <a href="{{ path('app_home') }}" class="brand-logo">Web CV</a>
 		    <ul id="nav-mobile" class="right hide-on-med-and-down">
 		    	{% if app.user %}
 			        <li><a class="hoverable" href="{{ path('app_about') }}">A Propos</a></li>

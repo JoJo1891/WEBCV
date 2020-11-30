@@ -36,16 +36,16 @@ class DefaultController extends AbstractController
     {
         $form = $this->createFormBuilder()
             ->add('name', TextType::class, array(
-                'label' => 'Votre nom',
+                'label' => 'Nom',
                 'attr' => array('class' => 'validate')))
             ->add('email', EmailType::class, array(
-                'label' => 'Votre email',
+                'label' => 'Email',
                 'attr' => array('class' => 'validate')))
             ->add('objet', TextType::class, array(
-                'label' => 'L\'objet de votre message',
+                'label' => 'Objet',
                 'attr' => array('class' => 'validate')))
             ->add('message', TextareaType::class, array(
-                'label' => 'Votre message',
+                'label' => 'Message',
                 'attr' => array('class' => 'validate materialize-textarea')))
             ->add('save', SubmitType::class, ['label' => 'Envoyer', 'attr' => array('class' => 'btn blue wave-effect wave-light')])
             ->getForm();

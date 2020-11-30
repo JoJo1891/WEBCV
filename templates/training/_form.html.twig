@@ -26,6 +26,9 @@
 			    			<button  class="green btn btn-large waves-effect waves-light">{{ button_label|default('Sauvegarder') }}</button>
 			    	</div>
     			</div>
+    				<div class="row left">
+    			     	<a class="btn blue waves-effect waves-light" href="{{ path('cv_show', {'id':cv}) }}">Retour au Cv</a>
+    			 	</div>
     		</div>
     	</div>
 {{ form_end(form) }}

@@ -1,5 +1,5 @@
 {% extends 'base.html.twig' %}
-{% block title %}<h1>Rechercher un CV</h1>{% endblock %} 
+{% block title %}Rechercher un CV{% endblock %} 
 {% block stylesheets %}
 	<style type="text/css">
 		.height30{
@@ -8,171 +8,161 @@
 		.br20{
 			border-radius: 20px;
 		}
+
 	</style>
 {% endblock %}
 	{% block body %}
-		<ul id="slide-out" class="sidenav grey darken-1">
-			<li>
-				<div class="user-view height30">
-					<div class="background">
-					    <img src="{{ asset('uploads/avatars/blank-admin.jpg') }}" alt="" class=" responsive-img">
-					</div>
+		<div class="blue-grey darken-3 hfull">
+			
+        {% include 'back/menu_admin.html.twig' %}
+        
+			<div class="container">
+				<div class="row center-align white-text ">
+						<h1>Rechercher un CV</h1>
 				</div>
-			</li>
-			{% if is_granted('ROLE_ADMIN') %}
-				<li><a class="white-text waves-effect" href="{{ path('user_index')}}"><i class="material-icons">cloud</i>Admin User</a></li>
-			{% endif %}
-			<li><a class="white-text waves-effect" href="#!"><i class="material-icons">cloud</i>Recherche CV</a></li>			    
-		</ul>
-					  
+				{% include 'back/search/_form.html.twig' with {route: 'search_cv_main'} %}
 				
-		<a href="#" data-target="slide-out" class="grey darken-4 sidenav-trigger btn large waves-effect wave-light">Menu ADMIN</a>
-		<div class="container">
-			<div class="row center-align">
-					<h1>Rechercher un CV</h1>
-			</div>
-			{% include 'back/search/_form.html.twig' with {route: 'search_cv_main'} %}
-			
-			<p class="flow-text">Résultats totals :{{ results|length + resultscertif|length + resultscenter|length + resultscontact|length + resultsinfos|length + resultslangue|length + resultsprofe|length + resultsskills|length + resultstraining|length }}</p>
-			
+				<p class="flow-text">Résultats totals :{{ results|length + resultscertif|length + resultscenter|length + resultscontact|length + resultsinfos|length + resultslangue|length + resultsprofe|length + resultsskills|length + resultstraining|length }}</p>
+				
 
-		    <div class="row">
-		    	{% if results is not empty %}
-		    		<div class="col s6">
-		    			<div class="card br20 teal lighten-4 col s10 offset-s1">
-		    				<p class="flow-text">{{ results|length }} Résultats de recherche par CV</p>
-				        	{% for result in results %}
-								{% set cv = result.transformed %}
-									<a href="{{ path('cv_show', {'id': cv.id}) }}">
-										<div class="hoverable chip">
-									    	{{cv.name}}
-										</div>
-									</a>
-				        	{% endfor %}
-		    			</div>
-		        	</div>
-		        {% endif %}
-		        {% if resultscertif is not empty %}
-		        	<div class="col s6">
-				        <div class="card s10 offset-s1 br20 cyan lighten-4">
-				    		<p class="flow-text">{{ resultscertif|length }} Résultats de recherche par certificats</p>
-				        	{% for result in resultscertif %}
-								{% set cv = result.transformed %}
-									<a href="{{ path('cv_show', {'id': cv.idCv.id}) }}">
-										<div class="hoverable chip">
-									    	{{cv.idCv}}
-										</div>
-									</a>
-				        	{% endfor %}
+			    <div class="row">
+			    	{% if results is not empty %}
+			    		<div class="col s6">
+			    			<div class="card br20 teal lighten-4 col s10 offset-s1">
+			    				<p class="flow-text">{{ results|length }} Résultats de recherche par CV</p>
+					        	{% for result in results %}
+									{% set cv = result.transformed %}
+										<a href="{{ path('cv_show', {'id': cv.id}) }}">
+											<div class="hoverable chip">
+										    	{{cv.name}}
+											</div>
+										</a>
+					        	{% endfor %}
+			    			</div>
+			        	</div>
+			        {% endif %}
+			        {% if resultscertif is not empty %}
+			        	<div class="col s6">
+					        <div class="card s10 offset-s1 br20 cyan lighten-4">
+					    		<p class="flow-text">{{ resultscertif|length }} Résultats de recherche par certificats</p>
+					        	{% for result in resultscertif %}
+									{% set cv = result.transformed %}
+										<a href="{{ path('cv_show', {'id': cv.idCv.id}) }}">
+											<div class="hoverable chip">
+										    	{{cv.idCv}}
+											</div>
+										</a>
+					        	{% endfor %}
+					        </div>
+				    	</div>
+				    {% endif %}
+				    {% if resultscenter is not empty %}
+				    	<div class="col s6">
+					        <div class="card col s10 offset-s1 br20 light-blue lighten-4">
+					    		<p class="flow-text">{{ resultscenter|length }} Résultats de recherche par centre d'intérêts</p>
+					        	{% for result in resultscenter %}
+									{% set cv = result.transformed %}
+										<a href="{{ path('cv_show', {'id': cv.idCv.id}) }}">
+											<div class="hoverable chip">
+										    	{{cv.idCv}}
+											</div>
+										</a>
+					        	{% endfor %}
+					        </div>
+					    </div>
+				    {% endif %}
+				    {% if resultscontact is not empty %}
+				    	<div class="col s6">
+					        <div class="card col s10 offset-s1 br20 blue lighten-4">
+					    		<p class="flow-text">{{ resultscontact|length }} Résultats de recherche par les coordonées</p>
+					        	{% for result in resultscontact %}
+									{% set cv = result.transformed %}
+										<a href="{{ path('cv_show', {'id': cv.idCv.id}) }}">
+											<div class="hoverable chip">
+										    	{{cv.idCv}}
+											</div>
+										</a>
+					        	{% endfor %}
+					        </div>
+					    </div>
+				    {% endif %}
+				    {% if resultsinfos is not empty %}
+				    	<div class="col s6">
+					        <div class="card col s10 offset-s1 br20 indigo lighten-4">
+					    		<p class="flow-text">{{ resultsinfos|length }} Résultats de recherche par informations personnels</p>
+					        	{% for result in resultsinfos %}
+									{% set cv = result.transformed %}
+										<a href="{{ path('cv_show', {'id': cv.idCv.id}) }}">
+											<div class="hoverable chip">
+										    	{{cv.idCv}}
+											</div>
+										</a>
+					        	{% endfor %}
+					        </div>
+					    </div>
+				    {% endif %}
+				    {% if resultslangue is not empty %}
+				    	<div class="col s6">
+					        <div class="card col s10 offset-s1 br20 deep-purple lighten-4">
+					    		<p class="flow-text">{{ resultslangue|length }} Résultats de recherche par Langues</p>
+					        	{% for result in resultslangue %}
+									{% set cv = result.transformed %}
+										<a href="{{ path('cv_show', {'id': cv.idCv.id}) }}">
+											<div class="hoverable chip">
+										    	{{cv.idCv}}
+											</div>
+										</a>
+					        	{% endfor %}
+					        </div>
+					    </div>
+				    {% endif %}
+				    {% if resultsprofe is not empty %}
+				    	<div class="col s6">
+					        <div class="card col s10 offset-s1 br20 purple lighten-4">
+					    		<p class="flow-text">{{ resultsprofe|length }} Résultats de recherche par parcours professionnels</p>
+					        	{% for result in resultsprofe%}
+									{% set cv = result.transformed %}
+										<a href="{{ path('cv_show', {'id': cv.idCv.id}) }}">
+											<div class="hoverable chip">
+										    	{{cv.idCv}}
+											</div>
+										</a>
+					        	{% endfor %}
+					        </div>
+					    </div>
+				    {% endif %}
+				    {% if resultsskills is not empty %}
+				    	<div class="col s6">
+					        <div class="card col s10 offset-s1 br20 pink lighten-4">
+					    		<p class="flow-text">{{ resultsskills|length }} Résultats de recherche par compétences</p>
+					        	{% for result in resultsskills %}
+									{% set cv = result.transformed %}
+										<a href="{{ path('cv_show', {'id': cv.idCv.id}) }}">
+											<div class="hoverable chip">
+										    	{{cv.idCv}}
+											</div>
+										</a>
+					        	{% endfor %}
+					        </div>
 				        </div>
-			    	</div>
-			    {% endif %}
-			    {% if resultscenter is not empty %}
-			    	<div class="col s6">
-				        <div class="card col s10 offset-s1 br20 light-blue lighten-4">
-				    		<p class="flow-text">{{ resultscenter|length }} Résultats de recherche par centre d'intérêts</p>
-				        	{% for result in resultscenter %}
-								{% set cv = result.transformed %}
-									<a href="{{ path('cv_show', {'id': cv.idCv.id}) }}">
-										<div class="hoverable chip">
-									    	{{cv.idCv}}
-										</div>
-									</a>
-				        	{% endfor %}
-				        </div>
-				    </div>
-			    {% endif %}
-			    {% if resultscontact is not empty %}
-			    	<div class="col s6">
-				        <div class="card col s10 offset-s1 br20 blue lighten-4">
-				    		<p class="flow-text">{{ resultscontact|length }} Résultats de recherche par les coordonées</p>
-				        	{% for result in resultscontact %}
-								{% set cv = result.transformed %}
-									<a href="{{ path('cv_show', {'id': cv.idCv.id}) }}">
-										<div class="hoverable chip">
-									    	{{cv.idCv}}
-										</div>
-									</a>
-				        	{% endfor %}
-				        </div>
-				    </div>
-			    {% endif %}
-			    {% if resultsinfos is not empty %}
-			    	<div class="col s6">
-				        <div class="card col s10 offset-s1 br20 indigo lighten-4">
-				    		<p class="flow-text">{{ resultsinfos|length }} Résultats de recherche par informations personnels</p>
-				        	{% for result in resultsinfos %}
-								{% set cv = result.transformed %}
-									<a href="{{ path('cv_show', {'id': cv.idCv.id}) }}">
-										<div class="hoverable chip">
-									    	{{cv.idCv}}
-										</div>
-									</a>
-				        	{% endfor %}
-				        </div>
-				    </div>
-			    {% endif %}
-			    {% if resultslangue is not empty %}
-			    	<div class="col s6">
-				        <div class="card col s10 offset-s1 br20 deep-purple lighten-4">
-				    		<p class="flow-text">{{ resultslangue|length }} Résultats de recherche par Langues</p>
-				        	{% for result in resultslangue %}
-								{% set cv = result.transformed %}
-									<a href="{{ path('cv_show', {'id': cv.idCv.id}) }}">
-										<div class="hoverable chip">
-									    	{{cv.idCv}}
-										</div>
-									</a>
-				        	{% endfor %}
-				        </div>
-				    </div>
-			    {% endif %}
-			    {% if resultsprofe is not empty %}
-			    	<div class="col s6">
-				        <div class="card col s10 offset-s1 br20 purple lighten-4">
-				    		<p class="flow-text">{{ resultsprofe|length }} Résultats de recherche par parcours professionnels</p>
-				        	{% for result in resultsprofe%}
-								{% set cv = result.transformed %}
-									<a href="{{ path('cv_show', {'id': cv.idCv.id}) }}">
-										<div class="hoverable chip">
-									    	{{cv.idCv}}
-										</div>
-									</a>
-				        	{% endfor %}
-				        </div>
-				    </div>
-			    {% endif %}
-			    {% if resultsskills is not empty %}
-			    	<div class="col s6">
-				        <div class="card col s10 offset-s1 br20 pink lighten-4">
-				    		<p class="flow-text">{{ resultsskills|length }} Résultats de recherche par compétences</p>
-				        	{% for result in resultsskills %}
-								{% set cv = result.transformed %}
-									<a href="{{ path('cv_show', {'id': cv.idCv.id}) }}">
-										<div class="hoverable chip">
-									    	{{cv.idCv}}
-										</div>
-									</a>
-				        	{% endfor %}
-				        </div>
-			        </div>
-			    {% endif %}
-			    {% if resultstraining is not empty %}
-			    	<div class="col s6">
-				        <div class="card col s10 offset-s1 br20 red lighten-4">
-				    		<p class="flow-text">{{ resultstraining|length }} Résultats de recherche par formations</p>
-				        	{% for result in resultstraining %}
-								{% set cv = result.transformed %}
-									<a href="{{ path('cv_show', {'id': cv.idCv.id}) }}">
-										<div class="hoverable chip">
-									    	{{cv.idCv}}
-										</div>
-									</a>
-				        	{% endfor %}
-				        </div>
-				    </div>
-			    {% endif %}
-		    </div>
+				    {% endif %}
+				    {% if resultstraining is not empty %}
+				    	<div class="col s6">
+					        <div class="card col s10 offset-s1 br20 red lighten-4">
+					    		<p class="flow-text">{{ resultstraining|length }} Résultats de recherche par formations</p>
+					        	{% for result in resultstraining %}
+									{% set cv = result.transformed %}
+										<a href="{{ path('cv_show', {'id': cv.idCv.id}) }}">
+											<div class="hoverable chip">
+										    	{{cv.idCv}}
+											</div>
+										</a>
+					        	{% endfor %}
+					        </div>
+					    </div>
+				    {% endif %}
+			    </div>
+			</div>
 		</div>
 
 

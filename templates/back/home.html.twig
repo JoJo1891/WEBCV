@@ -1,5 +1,5 @@
 {% extends 'base.html.twig' %}
-{% block title %}<h1>Accueil Web CV</h1>{% endblock %} 
+{% block title %}Accueil Web CV{% endblock %} 
 {% block stylesheets %}
 	<style type="text/css">
 		.height30{
@@ -8,29 +8,17 @@
 	</style>
 {% endblock %}
 	{% block body %}
-		<ul id="slide-out" class="sidenav grey darken-1">
-			<li>
-				<div class="user-view height30">
-					<div class="background">
-					    <img src="{{ asset('uploads/avatars/blank-admin.jpg') }}" alt="" class=" responsive-img">
-					</div>
-				</div>
-			</li>
-			{% if is_granted('ROLE_ADMIN') %}
-				<li><a class="white-text waves-effect" href="{{ path('user_index')}}"><i class="material-icons">cloud</i>Admin User</a></li>
-			{% endif %}
-			<li><a class="white-text waves-effect" href="{{ path('app_admin_search_cv')}}"><i class="material-icons">cloud</i>Recherche CV</a></li>			    
-		</ul>
-					  
-				
-		<a href="#" data-target="slide-out" class="grey darken-4 sidenav-trigger btn large waves-effect wave-light">Menu ADMIN</a>
-		<div class="container">
-			<div class="row center-align">
-					<h1>Interface Admin</h1>
-			</div>
+		<div class="blue-grey darken-3 hfull">
 			
-		
-	</div>
+        {% include 'back/menu_admin.html.twig' %}
 
-
+			<div class="container white-text">
+				<div class="row center-align">
+						<h1>Interface Admin</h1>
+				</div>
+				<div class="row">
+					<p class="flow-text center-align">Dans cet espace, retrouver toutes les fonctionnalités dédiés aux utilisaeurs ayant un niveau au minimum ROLE_BACK</p>
+				</div>
+			</div>
+		</div>
 {% endblock %}
