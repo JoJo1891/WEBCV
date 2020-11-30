@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class ProfessionalCourseType extends AbstractType
 {
@@ -15,24 +16,24 @@ class ProfessionalCourseType extends AbstractType
         $builder
             ->add('title', TextType::class, [
                 'label' => 'Nom de l entreprise',
-                'attr' => ['class' => 'center-align']
+                'attr' => ['class' => 'validate center-align']
     ])
             ->add('city', TextType::class, [
                 'label' => 'Ville',
-                'attr' => ['class' => 'center-align']
+                'attr' => ['class' => 'validate center-align']
     ])
             ->add('period', TextType::class, [
                 'label' => 'Période',
-                'attr' => ['class' => 'center-align']
+                'attr' => ['class' => 'validate center-align']
     ])
             ->add('skillsacquired', TextType::class, [
                 'label' => 'Compétence aquis',
-                'attr' => ['class' => 'center-align']
+                'attr' => ['class' => 'validate center-align']
     ])
-            ->add('description', TextType::class, [
-                'label' => 'Description des missions',
-                'attr' => ['class' => 'center-align']
-    ])
+            ->add('description', TextareaType::class, array(
+                'label' => 'Description de votre poste',
+                'attr' => array('class' => 'validate materialize-textarea'))
+    )
         ;
     }
 

@@ -17,15 +17,15 @@ class InfosPersoType extends AbstractType
         $builder
             ->add('firstname', TextType::class, [
                 'label' => 'Prénom',
-                'attr' => ['class' => 'center-align']
+                'attr' => ['class' => 'validate center-align']
     ])
             ->add('name', TextType::class, [
                 'label' => 'Nom',
-                'attr' => ['class' => 'center-align']
+                'attr' => ['class' => 'validate center-align']
     ])
             ->add('jobtitle', TextType::class, [
                 'label' => 'Intitulé de Poste',
-                'attr' => ['class' => 'center-align']
+                'attr' => ['class' => 'validate center-align']
     ])
             ->add('avatar', FileType::class, [
                 'label' => 'Avatar (PNG ou JPEG)',

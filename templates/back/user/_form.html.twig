@@ -1,4 +1,22 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    	<div class="row"> 
+    		<div class="card br20 white col s8 offset-s2">
+    			<div class="container">
+    				<div class="row">
+	    				<div class="input-field col s4">
+	    					{{ form_row(form.email) }}
+	    				</div>
+	    				<div class="input-field col s4">
+	    					{{ form_row(form.role) }}
+	    				</div>
+	    				<div class="input-field col s4">
+	    					{{ form_row(form.name) }}
+	    				</div>
+	    				<div class="input-field col s4">
+    						<button class="btn">{{ button_label|default('Save') }}</button>
+    					</div>
+    				</div>
+    			</div>
+    		</div>
+    	</div>
 {{ form_end(form) }}

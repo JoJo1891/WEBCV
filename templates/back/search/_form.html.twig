@@ -1,10 +1,18 @@
 {{ form_start(form) }}
     {#{ form_widget(form) }#}
     <div class="row">
-          <div class="input-field col s8 offset-s2">
-          {{ form_row(form.search) }}
-          {{ form_row(form.save)}}
-        </div>
+      <div class="card br20 white col s8 offset-s2">
+          <div class="container">
+            <div class="row">
+              <div class="input-field col s12">
+                {{ form_row(form.search) }}
+              </div>
+              <div class="row center-align">
+                {{ form_row(form.save)}}
+              </div>
+            </div>
+          </div>
       </div>
+    </div>
       
 {{ form_end(form) }}

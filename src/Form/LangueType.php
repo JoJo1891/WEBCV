@@ -15,7 +15,7 @@ class LangueType extends AbstractType
         $builder
             ->add('name', TextType::class, [
                 'label' => 'Langue',
-                'attr' => ['class' => 'center-align']
+                'attr' => ['class' => 'validate center-align']
     ])
         ;
     }

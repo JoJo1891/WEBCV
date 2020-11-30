@@ -17,15 +17,15 @@ class ContactInformationType extends AbstractType
         $builder
             ->add('adresse', TextType::class, [
                 'label' => 'Votre adresse : XXXXXXXX, CodePostale, Ville',
-                'attr' => ['class' => 'center-align']
+                'attr' => ['class' => 'validate center-align']
     ])
             ->add('numero', NumberType::class, [
                 'label' => 'Numéro de téléphone',
-                'attr' => ['class' => 'center-align']
+                'attr' => ['class' => 'validate center-align']
             ])
             ->add('email', EmailType::class, [
                 'label' => 'Votre email',
-                'attr' => ['class' => 'center-align']
+                'attr' => ['class' => 'validate center-align']
     ])
         ;
     }

@@ -1,9 +1,9 @@
 {# templates/security/login.html.twig #} {% extends 'base.html.twig' %} {% block
-title %}Log in!{% endblock %} {% block body %}
+title %}Connexion{% endblock %} {% block body %}
 <div class="container">
     <div class="row">
       <div class="card br20 blue-grey lighten-5 center-align">
-        <h1>Vueillez-vous identifier !</h1>
+        <h1>Connexion WEB CV !</h1>
             <form class="form-horizontal" role="form" method="post">
               {% if error %}
               <div class="alert alert-danger">
@@ -17,37 +17,28 @@ title %}Log in!{% endblock %} {% block body %}
               {% endif %}
               <div class="row">
               <div class="input-field col s6 offset-s3">
-                <label for="email" class="col-md-4 control-label"
-                  >E-Mail Address</label
-                >
-                <div class="col-md-12">
+                <label for="email">Email</label>
                   <input
                     id="inputEmail"
                     type="email"
-                    class="form-control"
+                    class="validate"
                     name="email"
                     value="{{ last_username }}"
                     required
                     autofocus
                   />
-                </div>
               </div>
             </div>
             <div class="row">
               <div class="input-field col s6 offset-s3">
-                <label for="password" class="col-md-4 control-label"
-                  >Password</label
-                >
-                <div class="col-md-12">
+                <label for="password">Mot de passe</label>
                   <input
                     id="inputPassword"
                     type="password"
-                    class="form-control"
+                    class="validate"
                     name="password"
                     required
-                  />
-                </div>
-              </div>
+                  />              </div>
             </div>
               <input
                 type="hidden"

@@ -34,7 +34,8 @@
     {% endblock %}
 
 {% block body %}
-    <div class="container">
+    <div class=" blue darken-4">
+        <div class="container">
         <div class="row">
             <div class="right-align col s12">
                 <div class="row magin-top">
@@ -47,7 +48,7 @@
 
                 </div>
             </div>
-            <div class="left-align col s12">
+            <div class="left-align col s12 white-text">
                 <h1>{{ cv.name }}
                     {% if is_granted('ROLE_BACK') %}
                                 {% else %}
@@ -263,7 +264,5 @@
 
         </div>
     </div>
-
-
-    
+    </div>    
 {% endblock %}

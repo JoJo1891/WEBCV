@@ -15,7 +15,7 @@ class CertificateType extends AbstractType
         $builder
             ->add('name', TextType::class, [
                 'label' => 'Nom du Certificat',
-                'attr' => ['class' => 'center-align']
+                'attr' => ['class' => 'validate center-align']
     ])
         ;
     }

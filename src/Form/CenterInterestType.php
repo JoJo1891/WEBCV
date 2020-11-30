@@ -15,7 +15,7 @@ class CenterInterestType extends AbstractType
         $builder
             ->add('name', TextType::class, [
                 'label' => 'Nom du Hobbies',
-                'attr' => ['class' => 'center-align']
+                'attr' => ['class' => 'validate center-align']
     ])
         ;
     }

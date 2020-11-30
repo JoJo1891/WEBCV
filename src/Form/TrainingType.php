@@ -15,19 +15,19 @@ class TrainingType extends AbstractType
         $builder
             ->add('diplomatitle', TextType::class, [
                 'label' => 'Nom du diplome',
-                'attr' => ['class' => 'center-align']
+                'attr' => ['class' => 'validate center-align']
     ])
             ->add('school', TextType::class, [
                 'label' => 'Ecole',
-                'attr' => ['class' => 'center-align']
+                'attr' => ['class' => 'validate center-align']
     ])
             ->add('city', TextType::class, [
                 'label' => 'Ville',
-                'attr' => ['class' => 'center-align']
+                'attr' => ['class' => 'validate center-align']
     ])
             ->add('yearofgraduation', TextType::class, [
                 'label' => 'Année d obtention',
-                'attr' => ['class' => 'center-align']
+                'attr' => ['class' => 'validate center-align']
     ])
         ;
     }
