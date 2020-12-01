@@ -60,9 +60,9 @@ class DefaultController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $email = (new TemplatedEmail())
-                ->from('joel.sylvius18@gmail.com')
+                ->from('contacts.webcv@gmail.com')
                 ->text('WEB CV Contact Page')
-                ->to('joel.sylvius18@gmail.com')
+                ->to('contacts.webcv@gmail.com')
                 ->subject($objet)
                 ->html('<h1>'.$name.'</h1><p>'.$mail.'</p><p>'.$message.'</p>')
                 

@@ -1,3 +1,39 @@
+{% for result in user %}
+   {% set user = result.transformed %}
+    <tr>
+        <td colspan="10%">{{ user.id }}</td>
+        <td colspan="15%">{{ user.name }}</td>
+        <td colspan="15%">{{ user.email }}</td>
+        <td colspan="15%">{{ user.roles ? user.roles|json_encode : '' }}</td>
+        <td colspan="45%">
+            {% if is_granted('ROLE_ADMIN') %}
+                <div class="row">
+                    <div class="col s6">
+                        {% if user.roles[0] == "ROLE_USER" %}
+                            <a href="#!"><i class="medium hoverable material-icons blue-text text-lighten-4">person</i></a>
+                            <a href="{{ path('switch_role', {'id': user.id, 'roles': 'ROLE_USER_ADMIN'})}}"><i class=" hoverable material-icons teal-text text-lighten-4">person</i></a>
+                            <a href="{{ path('switch_role', {'id': user.id, 'roles': 'ROLE_ADMIN'})}}"><i class=" hoverable material-icons lime-text text-accent-2">person</i></a>
+                        {% elseif user.roles[0]  == "ROLE_USER_ADMIN" %}
+                            <a href="{{ path('switch_role', {'id': user.id, 'roles': 'ROLE_USER'})}}"><i class=" hoverable material-icons blue-text text-lighten-4">person</i></a>
+                            <a href="#!"><i class="medium hoverable material-icons teal-text text-lighten-4">person</i></a>
+                            <a href="{{ path('switch_role', {'id': user.id, 'roles': 'ROLE_ADMIN'})}}"><i class=" hoverable material-icons lime-text text-accent-2">person</i></a>
+                        {% elseif user.roles[0]  == "ROLE_ADMIN" %}
+                            <a href="{{ path('switch_role', {'id': user.id, 'roles': 'ROLE_USER'})}}"><i class=" hoverable material-icons blue-text text-lighten-4">person</i></a>
+                            <a href="{{ path('switch_role', {'id': user.id, 'roles': 'ROLE_USER_ADMIN'})}}"><i class=" hoverable material-icons teal-text text-lighten-4">person</i></a>
+                            <a href="#!"><i class="medium hoverable material-icons lime-text text-accent-2">person</i></a>
+                        {% endif %}
+                    </div>
+                    <div class="col s3">
+                        {{ include('back/user/_delete_form.html.twig') }}
+                    </div>
+                </div>
+            {% endif %}
+            
+        </td>
+    </tr>
+{% else %}
+{% endfor %}
+
 {% for user in users %}
     <tr>
         <td colspan="10%">{{ user.id }}</td>
@@ -25,9 +61,6 @@
                     <div class="col s3">
                         {{ include('back/user/_delete_form.html.twig') }}
                     </div>
-                    <!--<div class="col s3">
-                        <a class="btn wave-effect wave-light blue" href="{{ path('user_edit', {'id': user.id}) }}"><i class="medium material-icons white-text">edit</i></a> 
-                    </div>-->
                 </div>
             {% endif %}
             

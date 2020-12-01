@@ -77,6 +77,15 @@ fos_elastica:
             persistence:
                 driver: orm
                 model: App\Entity\Training
+        user:
+            properties:
+                id: ~
+                name: ~
+                email: ~
+                roles: ~
+            persistence:
+                driver: orm
+                model: App\Entity\User
 
 
             

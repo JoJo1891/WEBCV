@@ -39,7 +39,7 @@ class DefaultController extends AbstractController
         $form = $this->createFormBuilder()
             ->add('search', TextType::class, array(
                 'label' => 'Entrer un ou plusieur mots clés à rechercher ',
-                'attr' => array('class' => 'validate center-align white-text')))
+                'attr' => array('class' => 'validate center-align')))
             ->add('save', SubmitType::class, ['label' => 'Rechercher', 'attr' => array('class' => 'btn blue wave-effect wave-light')])
             ->getForm();
 

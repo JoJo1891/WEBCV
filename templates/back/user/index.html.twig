@@ -24,7 +24,11 @@
             }
             .height30{
             height: 300px;
-        }
+            }
+            label[for="form_search"]
+            {
+                display:none;
+            }
         </style>
     {% endblock %}
 
@@ -43,6 +47,7 @@
                                   <div class="nav-wrapper container90">
                                     <a href="#!" class="brand-logo">Filtre</a>
                                     <ul class="right hide-on-med-and-down">
+                                        <li>{% include 'back/search/form.html.twig' %}</li>
                                       <li><a class="dropdown-trigger" href="#!" data-target="dropdown2" href="badges.html">Nom<i class=" orange-text material-icons right">arrow_drop_down</i></a></li>
                                       <!-- Dropdown Trigger -->
                                       <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Roles<i class="purple-text material-icons right">arrow_drop_down</i></a></li>

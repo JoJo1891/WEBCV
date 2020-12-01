@@ -45,6 +45,15 @@
         width: 90%;
         margin: auto;
       }
+      .fup100{
+        font-size: 100px!important;
+        line-height: 100px;
+      }
+      .btnLarge{
+        width: 200px;
+        height: 200px;
+        padding-top: 75px;
+      }
     </style>
     {% block stylesheets %}
     {% endblock %}
@@ -72,33 +81,33 @@
   	</nav>
     
     {% block body %}{% endblock %} 
-    
 
-    <nav class="fixbottom hide-on-large-only">
-    	<div class="nav-wrapper grey darken-4">
-		    <ul class="row center-align">
-		    	{% if app.user %}
-			        <li class="col s2 offset-s1 height100"><a class="flow-text" href="{{ path('app_home') }}">Accueil</a></li>
-			        <li class="col s2 height100"><a class="flow-text" href="{{ path('app_about') }}">A Propos</a></li>
-			        <li class="col s2 height100"><a class="flow-text" href="{{ path('app_contact') }}">Contact</a></li>
-			        {% if is_granted('ROLE_ADMIN') %}
-			        <li class="col s2 height100"><a class="flow-text" href="{{ path('app_admin_home')}}">Admin</a></li>
-			        {% else %}
-			        <li class="col s2 height100"><a class="flow-text" href="{{ path('cv_index')}}">Mes CV</a></li>
-					{% endif %}
-			        <li class="col s2 height100"><a class="flow-text" href="{{ path('app_logout') }}">Logout</a></li>
-		        {% else %}
-		        	<li class="col s3 height100"><a class="flow-text" href="{{ path('app_home') }}" >Accueil</a></li>
+    <div class="fixed-action-btn show-on-small hide-on-large-only">
+      <a class="btn-floating btnLarge grey darken-4">
+        <i class="fup100 material-icons red-text">menu</i>
+      </a>
+      <ul>
+        {% if app.user %}
+              <li><a class="btn-floating btnLarge grey darken-4" href="{{ path('app_home') }}"><i class="material-icons purple-text fup100">home</i></a></li>
+              <li><a class="btn-floating btnLarge grey darken-4" href="{{ path('app_about') }}"><i class="material-icons yellow-text text-darken-1 fup100">info_outline</i></a></li>
+              <li><a class="btn-floating btnLarge grey darken-4" href="{{ path('app_contact') }}"><i class="material-icons green-text fup100">contacts</i></li>
+              {% if is_granted('ROLE_ADMIN') %}
+              <li><a class="btn-floating btnLarge grey darken-4" href="{{ path('app_admin_home')}}"><i class="material-icons blue-text fup100">verified_user</i></li>
+              {% else %}
+              <li><a class="btn-floating btnLarge grey darken-4" href="{{ path('cv_index')}}"><i class="material-icons blue-text fup100">folder</i></a></li>
+          {% endif %}
+              <li><a class="btn-floating btnLarge grey darken-4" href="{{ path('app_logout') }}"><i class="material-icons red-text fup100">exit_to_app</i></a></li>
+            {% else %}
+              <li><a class="btn-floating btnLarge grey darken-4" href="{{ path('app_home') }}" ><i class="material-icons purple-text fup100">home</i></a></li>
 
-			        <li class="col s3 height100"><a class="flow-text" href="{{ path('app_about') }}">A Propos</a></li>
+              <li><a class="btn-floating btnLarge grey darken-4" href="{{ path('app_about') }}"><i class="material-icons yellow-text text-darken-1 fup100">info_outline</i></a></li>
 
-			        <li class="col s3 height100"><a class="flow-text" href="{{ path('app_contact') }}">Contact</a></li>
+              <li><a class="btn-floating btnLarge grey darken-4" href="{{ path('app_contact') }}"><i class="material-icons green-text fup100">contacts</i></a></li>
 
-			        <li class="col s3 height100"><a class="flow-text" href="{{ path('app_login') }}">Login</a></li>
-        		{% endif %}
-		    </ul>
-    	</div>
-  	</nav>
+              <li><a class="btn-floating btnLarge grey darken-4" href="{{ path('app_login') }}"><i class="material-icons light-green-text fup100">input</i></a></li>
+            {% endif %}
+      </ul>
+    </div>
     
     {% block javascripts %}
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -117,8 +126,11 @@
               function autoplay() {
                      $('.carousel').carousel('next');
                      setTimeout(autoplay, 6500);
-              }
-				    });
+              };
+
+              $('.fixed-action-btn').floatingActionButton({
+              });
+            });
             
             </script> 
             
