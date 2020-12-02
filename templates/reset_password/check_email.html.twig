@@ -3,10 +3,10 @@
 {% block title %}Password Reset Email Sent{% endblock %}
 
 {% block body %}
-
-<div class="container">
-    <div class="row">
-      <div class="card br20 blue-grey lighten-5 center-align">
+<div class="light-blue lighten-3 hfull">
+    <div class="container">
+        <div class="row">
+            <div class="card br20 blue-grey lighten-5 center-align">
                     <div class="card-body">
     					<p class="flow-text">An email has been sent that contains a link that you can click to reset your password. This link will expire in {{ tokenLifetime|date('g') }} hour(s).</p>
     					
@@ -15,4 +15,5 @@
     			</div>
     		</div>
     	</div>
+    </div>
 {% endblock %}

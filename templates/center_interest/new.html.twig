@@ -3,15 +3,15 @@
 {% block title %}New CenterInterest{% endblock %}
 
 {% block body %}
-	<div class="container">
-    	<div class="row">
-      		<div class="card br20 blue-grey lighten-5 center-align">
-			    <h1>Ajouter un center d'intérêt</h1>
+	<div class="light-green lighten-3 hfull">
+		<div class="container">
+	    	<div class="row">
+	      		<div class="card br20 blue-grey lighten-5 center-align">
+				    <h1>Ajouter un center d'intérêt</h1>
 
-			    {{ include('center_interest/_form.html.twig') }}
-			    <div class="row left">
-			     	<a class="btn blue waves-effect waves-light" href="{{ path('cv_show', {'id':cv}) }}">Retour au Cv</a>
-			 	</div>
+				    {{ include('center_interest/_form.html.twig') }}
+				    
+				</div>
 			</div>
 		</div>
 	</div>

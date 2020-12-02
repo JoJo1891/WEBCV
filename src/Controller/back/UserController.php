@@ -15,6 +15,10 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Mime\Address;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use FOS\ElasticaBundle\Finder\TransformedFinder;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
  * @Route("/back/user")
@@ -23,12 +27,35 @@ use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 class UserController extends AbstractController
 {
     /**
-     * @Route("/", name="user_index", methods={"GET"})
+     * @Route("/", name="user_index", methods={"GET", "POST"})
      */
-    public function index(UserRepository $userRepository): Response
+    public function index(UserRepository $userRepository, Request $request, SessionInterface $session,TransformedFinder $userFinder): Response
     {
+        $form = $this->createFormBuilder()
+            ->add('search', TextType::class, array(
+                'attr' => array('class' => 'validate center-align white-text')))
+            ->add('save', SubmitType::class, ['label' => 'Go', 'attr' => array('class' => 'btn btn-small blue-text transparent')])
+            ->getForm();
+
+        $req = $form->handleRequest($request);
+        $results = null;
+        
+        $q = $req->getData()["search"];
+        
+        
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $results = !empty($q) ? $userFinder->findHybrid($q) : [];
+            
+            
+        }
+
+
         return $this->render('back/user/index.html.twig', [
             'users' => $userRepository->findAll(),
+            'user' => $results,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -54,11 +81,21 @@ class UserController extends AbstractController
             $vals = $userRepository->findBy(array(), array('name' => 'DESC'));
         }
 
+        $form = $this->createFormBuilder()
+            ->add('search', TextType::class, array(
+                'attr' => array('class' => 'validate center-align white-text')))
+            ->add('save', SubmitType::class, ['label' => 'Go', 'attr' => array('class' => 'btn btn-small blue-text transparent')])
+            ->getForm();
+
         return $this->render('back/user/index.html.twig', [
             'users' => $vals,
+            'user' => "",
+            'form' => $form->createView(),
         ]);
         
     }
+
+    
 
     /**
     * @Route("/{id}/switch/{roles}", name="switch_role", methods={"GET", "POST"})
@@ -87,7 +124,7 @@ class UserController extends AbstractController
         $entityManager->flush();
 
         $email = (new TemplatedEmail())
-            ->from(new Address('joel.sylvius18@gmail.com', 'WEB CV Informations'))
+            ->from(new Address('contacts.webcv@gmail.com', 'WEB CV Informations'))
             ->to($usr->getEmail())
             ->subject('Changement de privilège')
             ->htmlTemplate('back/user/email.html.twig')
@@ -104,48 +141,6 @@ class UserController extends AbstractController
 
     }
 
-    /**
-     * @Route("/new", name="user_new", methods={"GET","POST"})
-     */
-    public function new(Request $request): Response
-    {
-        $user = new User();
-        $form = $this->createForm(User1Type::class, $user);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('user_index');
-        }
-
-        return $this->render('back/user/new.html.twig', [
-            'user' => $user,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
-     * @Route("/{id}/edit", name="user_edit", methods={"GET","POST"})
-     */
-    public function edit(Request $request, User $user): Response
-    {
-        $form = $this->createForm(User1Type::class, $user);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('user_index');
-        }
-
-        return $this->render('back/user/edit.html.twig', [
-            'user' => $user,
-            'form' => $form->createView(),
-        ]);
-    }
 
     /**
      * @Route("/{id}", name="user_delete", methods={"DELETE"})
