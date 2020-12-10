@@ -22,11 +22,9 @@ class DefaultController extends AbstractController
     */
     public function home(): Response
     {
-        $number = random_int(0, 100);
+        
 
-        return $this->render('public/home.html.twig', [
-            'number' => $number,
-        ]);
+        return $this->render('public/home.html.twig');
     }
 
     /**
@@ -68,6 +66,7 @@ class DefaultController extends AbstractController
                 
             ;
             $mailer->send($email);
+            $this->addFlash('success', 'Message envoyer!');
         }
 
         
