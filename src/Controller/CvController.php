@@ -62,8 +62,7 @@ class CvController extends AbstractController
 
         return $this->render('cv/new.html.twig', [
             'cv' => $cv,
-            'form' => $form->createView(),
-            'user' => $users,
+            'form' => $form->createView()
             ]);
     }
 

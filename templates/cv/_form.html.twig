@@ -15,7 +15,10 @@
                 	</div>
                 </div>
                     <div class="row left">
-                        <a class="btn blue waves-effect waves-light" href="{{ path('cv_show', {'id':cv}) }}">Retour au Cv</a>
+                        {% if cv == null %}
+                        {% else %}
+                            <a class="btn blue waves-effect waves-light" href="{{ path('cv_index') }}">Retour au Cv</a>
+                        {% endif %}
                     </div>
             </div>
         </div>
